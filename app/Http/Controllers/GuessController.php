@@ -19,7 +19,7 @@ class GuessController extends Controller
         $userId = Session::get('opt_in_user_id');
         $user = OptInUser::findOrFail($userId);
         $today = Carbon::today();
-        
+
         $stocks = Stock::all();
         $existingGuesses = Guess::where('opt_in_user_id', $userId)
             ->where('guess_date', $today)

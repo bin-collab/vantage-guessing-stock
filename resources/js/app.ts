@@ -7,6 +7,10 @@ import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { initializeTheme } from './composables/useAppearance';
 
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
+import { i18n } from './i18n';
+
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
     interface ImportMetaEnv {
@@ -29,6 +33,8 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(ElementPlus)
+            .use(i18n)
             .mount(el);
     },
     progress: {

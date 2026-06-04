@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\OptInUser;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -43,7 +44,9 @@ class HandleInertiaRequests extends Middleware
             'name' => config('app.name'),
             'quote' => ['message' => trim($message), 'author' => trim($author)],
             'auth' => [
-                'user' => $request->user(),
+                'user' => session()->has('opt_in_user_id')
+                    ? OptInUser::find(session('opt_in_user_id'))
+                    : null,
             ],
         ]);
     }

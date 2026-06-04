@@ -10,10 +10,6 @@ use Inertia\Inertia;
 
 class AuthController extends Controller
 {
-    public function showLogin()
-    {
-        return Inertia::render('Login');
-    }
 
     public function login(Request $request)
     {
@@ -34,7 +30,7 @@ class AuthController extends Controller
 
         Session::put('opt_in_user_id', $user->id);
 
-        return redirect()->route('guess.index');
+        return back();
     }
 
     public function logout()
