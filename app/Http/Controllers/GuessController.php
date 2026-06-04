@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Models\Stock;
 use App\Models\Guess;
 use App\Models\OptInUser;
+use App\Models\Setting;
+use App\Models\Stock;
 use App\Services\GuessService;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
@@ -18,7 +18,7 @@ class GuessController extends Controller
     {
         $userId = Session::get('opt_in_user_id');
         $user = OptInUser::findOrFail($userId);
-        $today = Carbon::today();
+        $today = Carbon::today('+03:00');
 
         $stocks = Stock::all();
         $existingGuesses = Guess::where('opt_in_user_id', $userId)
@@ -37,10 +37,13 @@ class GuessController extends Controller
     public function store(Request $request, GuessService $guessService)
     {
         $userId = Session::get('opt_in_user_id');
-        $today = Carbon::today();
+        $today = Carbon::today('+03:00');
 
-        if (!$guessService->isGuessingAllowed($today)) {
-            return back()->withErrors(['message' => 'Guessing is closed for today (Deadline: 6 PM).']);
+        if (! $guessService->isGuessingAllowed($today)) {
+            $settings = Setting::first();
+            $deadline = $settings ? $settings->daily_deadline : '18:00';
+
+            return back()->withErrors(['message' => "Guessing is closed for today (Deadline: {$deadline} GMT+3)."]);
         }
 
         $request->validate([

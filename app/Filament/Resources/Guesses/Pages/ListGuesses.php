@@ -16,4 +16,13 @@ class ListGuesses extends ListRecords
             CreateAction::make(),
         ];
     }
+
+    public function bootedInteractsWithTable(): void
+    {
+        parent::bootedInteractsWithTable();
+
+        if ($this->tableGrouping === 'guess_date' || $this->tableGrouping === null) {
+            $this->tableGrouping = 'guess_date:desc';
+        }
+    }
 }

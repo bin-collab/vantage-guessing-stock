@@ -1,16 +1,16 @@
 <?php
 
+use App\Models\Guess;
+use App\Models\Setting;
 use App\Models\Stock;
 use App\Services\GuessService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
-use App\Models\Guess;
-use Illuminate\Support\Facades\Session;
-
 Route::get('/', function (GuessService $guessService) {
-    $today = Carbon::today();
+    $today = Carbon::today('+03:00');
     $existingGuesses = null;
 
     if (Session::has('opt_in_user_id')) {
@@ -24,6 +24,7 @@ Route::get('/', function (GuessService $guessService) {
         'stocks' => Stock::all(),
         'canGuess' => $guessService->isGuessingAllowed($today),
         'existingGuesses' => $existingGuesses,
+        'settings' => Setting::first(),
     ]);
 })->name('landing');
 

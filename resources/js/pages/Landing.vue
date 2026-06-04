@@ -8,6 +8,11 @@ const props = defineProps<{
     stocks?: Array<{ id: number; symbol: string; name: string }>;
     canGuess?: boolean;
     existingGuesses?: Record<number, { guessed_price: number }>;
+    settings?: {
+        guess_start_date: string;
+        guess_end_date: string;
+        daily_deadline: string;
+    };
 }>();
 
 const page = usePage();
@@ -108,14 +113,30 @@ const minutesLeft = ref('45');
 const secondsLeft = ref('12');
 let timer: any = null;
 
+const getTodayGmt3 = () => {
+    const options = { timeZone: 'Asia/Riyadh', year: 'numeric', month: '2-digit', day: '2-digit' };
+    const formatter = new Intl.DateTimeFormat('en-CA', options);
+    return formatter.format(new Date());
+};
+
 const updateCountdown = () => {
     const now = new Date();
-    const deadlineUTC = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 15, 0, 0);
-    let diff = deadlineUTC - now.getTime();
+    const dailyDeadline = props.settings?.daily_deadline || '18:00';
+    const todayGmt3 = getTodayGmt3();
+
+    const deadlineStr = `${todayGmt3}T${dailyDeadline}:00+03:00`;
+    let deadlineTime = new Date(deadlineStr);
+
+    let diff = deadlineTime.getTime() - now.getTime();
     if (diff < 0) {
-        const tomorrowUTC = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 15, 0, 0);
-        diff = tomorrowUTC - now.getTime();
+        const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+        const tomorrowFormatter = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Riyadh', year: 'numeric', month: '2-digit', day: '2-digit' });
+        const tomorrowGmt3 = tomorrowFormatter.format(tomorrow);
+        const tomorrowDeadlineStr = `${tomorrowGmt3}T${dailyDeadline}:00+03:00`;
+        deadlineTime = new Date(tomorrowDeadlineStr);
+        diff = deadlineTime.getTime() - now.getTime();
     }
+
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
@@ -195,7 +216,7 @@ onUnmounted(() => {
         <div class="box">
             <div class="top-text">僅限於2026年6月22日至2026年6月28日期間內成功報名的客戶，方有資格參與預測期間活動。</div>
             <div class="cur-date">
-                <div class="cur-date-flex"><img src="/images/date.svg"/>2026年7月8日</div>
+                <div class="cur-date-flex"><img src="/images/date.svg"/>{{ todayDateFormatted }}</div>
             </div>
 
             <div class="remaining-time">
@@ -219,7 +240,7 @@ onUnmounted(() => {
             </div>
 
             <div class="time-tips">
-                <div class="time-tips1">請在18:00(GMT+3)前提交估算的收市價。</div>
+                <div class="time-tips1">請在{{ props.settings?.daily_deadline || '18:00' }}(GMT+3)前提交估算的收市價。</div>
                 <div class="time-tips2">輸入產品收盤價的整數部分（例：若產品實際價格為 396.72，則預測 396 將被視為正確預測，而預測 397 則被視為錯誤預測）。</div>
                 <div class="time-tips3">*本日收市價以MT5VantageMarkets-Live系統時間23:59為準。</div>
             </div>
@@ -230,10 +251,10 @@ onUnmounted(() => {
                         <img :src="item.images" alt="">
                         <div class="stocks-li-flex">
                             <div class="stocks-name">{{ item.name }}</div>
-                            <input class="stocks-input" type="number" :placeholder="item.placeholder" v-model="form.guesses[index].guessed_price">
+                            <input class="stocks-input" type="number" :placeholder="item.placeholder" v-model="form.guesses[index].guessed_price" :disabled="!canGuess">
                             <div class="stocks-control">
-                                <button class="stocks-submit" @click="submitGuess(index)">提交</button>
-                                <button class="stocks-change" @click="submitGuess(index)">更改</button>
+                                <button class="stocks-submit" @click="submitGuess(index)" :disabled="!canGuess">提交</button>
+                                <button class="stocks-change" @click="submitGuess(index)" :disabled="!canGuess">更改</button>
                             </div>
                         </div>
                     </li>
@@ -305,6 +326,10 @@ onUnmounted(() => {
 }
 .login-dialog .el-dialog__body {
     padding: 0 !important;
+}
+
+.language-btn:focus-visible{
+    outline: none !important;
 }
 
 @media (max-width: 650px) {
@@ -826,5 +851,18 @@ input[type=number] {
     .header-box{
         width: 95%;
     }
+}
+
+.stocks-submit:disabled, .stocks-change:disabled {
+    background-color: #555555 !important;
+    border-color: #666666 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    opacity: 0.6;
+}
+.stocks-input:disabled {
+    background: #ECECECD1 !important;
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 </style>

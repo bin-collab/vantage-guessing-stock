@@ -1,18 +1,10 @@
 import { createI18n } from 'vue-i18n';
+import zh from './locales/zh.json';
+import en from './locales/en.json';
 
 const messages = {
-    zh: {
-        language: '中文',
-        login: '登入',
-        uidPlaceholder: '請輸入你的UID。',
-        emailPlaceholder: '請輸入你的註冊電郵地址。',
-    },
-    en: {
-        language: 'English',
-        login: 'Login',
-        uidPlaceholder: 'Please enter your UID.',
-        emailPlaceholder: 'Please enter your registered email address.',
-    }
+    zh,
+    en,
 };
 
 export const i18n = createI18n({

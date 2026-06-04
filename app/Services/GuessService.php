@@ -2,11 +2,11 @@
 
 namespace App\Services;
 
-use App\Models\Guess;
 use App\Models\ClosingPrice;
+use App\Models\Guess;
 use App\Models\OptInUser;
+use App\Models\Setting;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class GuessService
 {
@@ -22,7 +22,7 @@ class GuessService
             ->chunkById(100, function ($guesses) use ($integerPrice) {
                 foreach ($guesses as $guess) {
                     $guess->update([
-                        'is_correct' => $guess->guessed_price === $integerPrice
+                        'is_correct' => $guess->guessed_price === $integerPrice,
                     ]);
                 }
             });
@@ -30,20 +30,41 @@ class GuessService
 
     /**
      * Check if a user can still submit/modify a guess for today.
-     * Deadline is 6 PM daily.
+     * Allowed range and daily deadline (GMT+3) are configured in Settings database.
      */
     public function isGuessingAllowed(Carbon $date): bool
     {
-        // For testing/development, we might want to override this.
-        // In production, check if current time is before 6 PM of the given date.
-        $now = Carbon::now();
+        $settings = Setting::first();
+        if (! $settings) {
+            $start = Carbon::parse('2026-07-06', '+03:00');
+            $end = Carbon::parse('2026-07-10', '+03:00');
+            $deadline = '18:00';
+        } else {
+            $start = Carbon::parse($settings->guess_start_date->toDateString(), '+03:00');
+            $end = Carbon::parse($settings->guess_end_date->toDateString(), '+03:00');
+            $deadline = $settings->daily_deadline;
+        }
 
-        // If the date is not today, we can't guess (only current day allowed)
-        if (!$date->isToday()) {
+        $now = Carbon::now('+03:00');
+
+        // If the date is not today in GMT+3, we can't guess (only current day allowed)
+        if ($date->format('Y-m-d') !== $now->format('Y-m-d')) {
             return false;
         }
 
-        return $now->hour < 18;
+        // Must be within the campaign start and end dates
+        $startLimit = $start->copy()->startOfDay();
+        $endLimit = $end->copy()->endOfDay();
+
+        if (! $now->between($startLimit, $endLimit)) {
+            return false;
+        }
+
+        // Must be before the daily deadline (GMT+3)
+        [$hour, $minute] = explode(':', $deadline);
+        $deadlineTime = $now->copy()->setTime((int) $hour, (int) $minute, 0);
+
+        return $now->lt($deadlineTime);
     }
 
     /**
@@ -55,7 +76,7 @@ class GuessService
         return OptInUser::withCount([
             'guesses' => function ($query) {
                 $query->where('is_correct', true);
-            }
+            },
         ])
             ->orderByDesc('guesses_count')
             ->orderBy('created_at')
