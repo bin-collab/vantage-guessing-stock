@@ -20,7 +20,7 @@ class SettingResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
 
-    protected static ?string $navigationLabel = '竞猜活动设置';
+    protected static ?string $navigationLabel = '竞猜设置';
 
     protected static ?string $modelLabel = '竞猜设置';
 

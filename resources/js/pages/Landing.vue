@@ -161,13 +161,13 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <Head title="US Stock CFD Price Guess - Vantage" />
+    <Head title="US Stock CFD Price Guess" />
 
     <section id="header">
         <div class="header-box">
             <div class="header-flex">
                 <div class="logo">
-                    <img src="/images/logo.png" alt="Vantage Hero Banner" />
+                    <img src="/images/logo.png" alt="logo" />
                 </div>
 
                 <div class="menu">
@@ -272,17 +272,18 @@ onUnmounted(() => {
       v-model="loginModalVisible"
       width="850px"
       class="login-dialog"
-      :show-close="false"
+      :show-close="true"
       destroy-on-close
       append-to-body
     >
         <div class="login-box">
             <div class="login-left">
-                <!-- <div class="login-title">美股差價合約價格預測</div> -->
+                <div class="login-title">美股差價合約價格預測</div>
                 <img src="/images/login-img.webp" class="login-img"/>
             </div>
             <div class="login-right">
-                <div class="login-lang">
+                <button class="login-close-btn" @click="loginModalVisible = false">&#10005;</button>
+                <!-- <div class="login-lang">
                     <el-dropdown @command="changeLanguage">
                         <div class="lang-btn">
                             {{ locale === 'zh' ? '中文' : 'English' }}
@@ -294,9 +295,10 @@ onUnmounted(() => {
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
-                </div>
+                </div> -->
                 <div class="form">
                     <el-form :model="loginForm">
+                        <div class="mobile-login-title">美股差價合約價格預測</div>
                         <el-form-item>
                             <el-input v-model="loginForm.uid" placeholder="請輸入你的UID。"></el-input>
                         </el-form-item>
@@ -324,6 +326,30 @@ onUnmounted(() => {
 .login-dialog .el-dialog__header {
     display: none;
 }
+.login-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0px 1px 7px 1px #ccc;
+    /* background: rgba(0, 0, 0, 0.12); */
+    color: #555;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 10;
+}
+.login-close-btn:hover {
+    background: rgba(0, 0, 0, 0.22);
+    color: #111;
+}
 .login-dialog .el-dialog__body {
     padding: 0 !important;
 }
@@ -332,7 +358,7 @@ onUnmounted(() => {
     outline: none !important;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 1000px) {
     .el-dialog.login-dialog {
         width: 95% !important;
         border-radius: 12px !important;
@@ -351,7 +377,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
-
+.mobile-login-title{
+    display: none;
+}
 #header{
     text-align: center;
     position: fixed;
@@ -412,7 +440,7 @@ input[type=number] {
 }
 
 #banner{
-    background-image: url('images/banner.webp');
+    background-image: url('/images/banner.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -547,7 +575,7 @@ input[type=number] {
 }
 
 .stocks-li{
-    background-image: url('images/stocks-bg.webp');
+    background-image: url('/images/stocks-bg.webp');
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: top;
@@ -680,7 +708,7 @@ input[type=number] {
 .login-lang {
     position: absolute;
     top: 25px;
-    right: 30px;
+    right: 60px;
 }
 
 .lang-btn {
@@ -736,6 +764,25 @@ input[type=number] {
     border-color: #C74D23 !important;
 }
 
+.login-title{
+    position: absolute;
+    color: #fff;
+    top: 40px;
+    left: 0;
+    right: 0;
+    margin: auto 0;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    background: linear-gradient(180deg, #FFFFFF 30.29%, #ED650D 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-weight: bold;
+    -webkit-text-fill-color: transparent;
+    line-height: normal;
+}
+
+
 @media (max-width: 1150px) {
     .banner-box{
         width: 85%;
@@ -778,8 +825,17 @@ input[type=number] {
     .stocks-input{
         margin-bottom: 10px;
     }
+
 }
 @media (max-width: 650px) {
+    .mobile-login-title{
+        display: block;
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #E25A2B;
+    }
     #banner{
         height: 250px;
         font-size: 18px;
@@ -829,9 +885,6 @@ input[type=number] {
 
     .login-box{
         min-height: 350px;
-    }
-    .form {
-        margin-top: 60px;
     }
 
     .login-submit{

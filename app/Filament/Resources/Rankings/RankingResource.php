@@ -17,7 +17,7 @@ use Filament\Tables\Table;
 class RankingResource extends Resource
 {
     protected static ?string $model = \App\Models\Ranking::class;
-    protected static ?string $navigationLabel = 'Rankings';
+    protected static ?string $navigationLabel = '竞猜排名';
     protected static ?string $slug = 'rankings';
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-trophy';
 

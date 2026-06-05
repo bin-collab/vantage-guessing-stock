@@ -20,6 +20,8 @@ class GuessResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static ?string $navigationLabel = '用户竞猜';
+
     public static function form(Schema $schema): Schema
     {
         return GuessForm::configure($schema);
