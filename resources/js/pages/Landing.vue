@@ -248,7 +248,7 @@ onUnmounted(() => {
             <div class="stocks-box">
                 <ul class="stocks-ul">
                     <li class="stocks-li" v-for="(item, index) in stocksList" :key="item.id">
-                        <img :src="item.images" alt="">
+                        <img :src="item.images" :alt="item.name">
                         <div class="stocks-li-flex">
                             <div class="stocks-name">{{ item.name }}</div>
                             <input class="stocks-input" type="number" :placeholder="item.placeholder" v-model="form.guesses[index].guessed_price" :disabled="!canGuess">
@@ -490,9 +490,10 @@ input[type=number] {
     margin-bottom: 30px;
 }
 .time-title {
-    font-size: 16px;
-    color: #E0E0E0;
+    font-size: 24px;
+    color: #fff;
     margin-bottom: 12px;
+    font-weight: lighter;
 }
 
 .cur-date{
@@ -530,18 +531,18 @@ input[type=number] {
     width: 60px;
 }
 .time-value {
-    font-size: 42px;
+    font-size: 55px;
     line-height: 1;
     color: #FFFFFF;
-    font-family: 'Gilroy';
+    font-family: 'Gilroy-Medium';
 }
 .time-label {
-    font-size: 14px;
+    font-size: 16px;
     color: #fff;
     margin-top: 8px;
 }
 .time-separator {
-    font-size: 42px;
+    font-size: 55px;
     line-height: 1;
     color: #FFFFFF;
     margin: 0 10px;
@@ -785,15 +786,16 @@ input[type=number] {
     -webkit-text-fill-color: transparent;
     line-height: normal;
 }
-
-
+@media (max-width: 1400px) {
+    #footer{
+        width: 95%;
+    }
+}
 @media (max-width: 1150px) {
     .banner-box{
         width: 85%;
     }
-    #footer{
-        width: 95%;
-    }
+
     .box{
         width: 95%;
     }
@@ -806,8 +808,12 @@ input[type=number] {
         width: 40%;
     }
 
-    .time-value{
+    .time-value,.time-separator{
         font-size: 32px;
+    }
+
+    .time-title{
+        font-size: 18px;
     }
 
 }
@@ -828,6 +834,10 @@ input[type=number] {
     }
     .stocks-input{
         margin-bottom: 10px;
+    }
+
+    .stocks-li{
+        background-size: cover;
     }
 
 }
@@ -859,8 +869,8 @@ input[type=number] {
     }
     .stocks-li {
         align-items: center;
-        padding: 20px 0;
-            background-size: cover;
+        padding: 20px;
+        background-size: cover;
     }
 
     .stocks-submit,.stocks-change{
@@ -907,6 +917,15 @@ input[type=number] {
 
     .header-box{
         width: 95%;
+    }
+    .cur-date{
+        padding: 8px 20px;
+    }
+    .logo img {
+        height: 30px;
+    }
+    .banner-spec-text p{
+        line-height: unset;
     }
 }
 
