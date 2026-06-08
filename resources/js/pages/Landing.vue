@@ -4,10 +4,25 @@ import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ElMessage } from 'element-plus'
 
+type GuessHistoryStock = {
+    symbol: string;
+    name: string;
+};
+
+type GuessHistoryItem = {
+    id: number;
+    stock_id: number;
+    guessed_price: number;
+    guess_date: string;
+    is_correct: boolean | null;
+    stock: GuessHistoryStock;
+};
+
 const props = defineProps<{
     stocks?: Array<{ id: number; symbol: string; name: string }>;
     canGuess?: boolean;
     existingGuesses?: Record<number, { guessed_price: number }>;
+    guessHistory?: GuessHistoryItem[];
     settings?: {
         guess_start_date: string;
         guess_end_date: string;
@@ -24,9 +39,19 @@ const changeLanguage = (command: string) => {
 };
 
 const loginModalVisible = ref(false);
+const guessHistoryModalVisible = ref(false);
 
 const openloginModal = () => {
     loginModalVisible.value = true;
+};
+
+const openGuessHistoryModal = () => {
+    if (!user.value) {
+        loginModalVisible.value = true;
+        return;
+    }
+
+    guessHistoryModalVisible.value = true;
 };
 
 const handleLogout = () => {
@@ -150,6 +175,41 @@ const todayDateFormatted = computed(() => {
     return new Date().toLocaleDateString('zh-CN', options);
 });
 
+const guessHistoryGroups = computed(() => {
+    const grouped = new Map<string, GuessHistoryItem[]>();
+
+    for (const record of props.guessHistory ?? []) {
+        const currentGroup = grouped.get(record.guess_date) ?? [];
+        currentGroup.push(record);
+        grouped.set(record.guess_date, currentGroup);
+    }
+
+    return Array.from(grouped.entries()).map(([guessDate, records]) => ({
+        guessDate,
+        records,
+    }));
+});
+
+const formatGuessDate = (guessDate: string): string => {
+    return guessDate.split('T')[0];
+};
+
+const formatGuessStatus = (isCorrect: boolean | null): string => {
+    if (isCorrect === null) {
+        return '待结算';
+    }
+
+    return isCorrect ? '已命中' : '未命中';
+};
+
+const formatGuessStatusType = (isCorrect: boolean | null): 'success' | 'warning' | 'info' => {
+    if (isCorrect === null) {
+        return 'warning';
+    }
+
+    return isCorrect ? 'success' : 'info';
+};
+
 onMounted(() => {
     updateCountdown();
     timer = setInterval(updateCountdown, 1000);
@@ -177,7 +237,7 @@ onUnmounted(() => {
                     <template v-else>
                         <el-dropdown @command="handleLogout">
                             <div class="language-btn" style="cursor: pointer;">
-                                {{ user.email }}
+                                {{ user.name }}
                             </div>
                             <template #dropdown>
                                 <el-dropdown-menu>
@@ -250,7 +310,7 @@ onUnmounted(() => {
                     <li class="stocks-li" v-for="(item, index) in stocksList" :key="item.id">
                         <img :src="item.images" :alt="item.name">
                         <div class="stocks-li-flex">
-                            <div class="stocks-name">{{ item.name }}</div>
+                            <div class="stocks-name">{{ item.symbol }}</div>
                             <input class="stocks-input" type="number" :placeholder="item.placeholder" v-model="form.guesses[index].guessed_price" :disabled="!canGuess">
                             <div class="stocks-control">
                                 <button class="stocks-submit" @click="submitGuess(index)" :disabled="!canGuess">提交</button>
@@ -259,6 +319,8 @@ onUnmounted(() => {
                         </div>
                     </li>
                 </ul>
+
+                <button class="guess-history-btn" @click="openGuessHistoryModal">我的竞猜记录</button>
             </div>
         </div>
 
@@ -267,6 +329,60 @@ onUnmounted(() => {
         </div>
     </section>
 
+
+    <el-dialog
+      v-model="guessHistoryModalVisible"
+      width="720px"
+      class="history-dialog"
+      :show-close="true"
+      :lock-scroll="false"
+      destroy-on-close
+      append-to-body
+    >
+        <div class="history-box">
+            <button class="history-close-btn" @click="guessHistoryModalVisible = false">&#10005;</button>
+            <div class="history-header">
+                <div class="history-title">我的竞猜记录</div>
+            </div>
+
+            <div v-if="guessHistoryGroups.length" class="history-list">
+                <section
+                    v-for="group in guessHistoryGroups"
+                    :key="group.guessDate"
+                    class="history-group"
+                >
+                    <div class="history-group-title">
+                        {{ formatGuessDate(group.guessDate) }}
+                    </div>
+
+                    <div class="history-items">
+                        <div v-for="record in group.records" :key="record.id" class="history-item">
+                            <div class="history-item-main">
+                                <div class="history-stock">
+                                    <span class="history-stock-symbol">{{ record.stock.symbol }}</span>
+                                </div>
+
+                            </div>
+                            <div class="history-item-meta">
+                                <span class="history-label">竞猜价格</span>
+                                <div class="history-price">{{ record.guessed_price }}</div>
+                            </div>
+                            <div class="history-item-meta">
+                                <span class="history-label">竞猜结果</span>
+                                <el-tag class="history-result" :type="formatGuessStatusType(record.is_correct)" effect="light" round>
+                                    {{ formatGuessStatus(record.is_correct) }}
+                                </el-tag>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div v-else class="history-empty">
+                <el-empty description="暂无竞猜记录" />
+            </div>
+        </div>
+    </el-dialog>
 
     <el-dialog
       v-model="loginModalVisible"
@@ -358,6 +474,172 @@ onUnmounted(() => {
     padding: 0 !important;
 }
 
+.history-dialog {
+    border-radius: 20px !important;
+    overflow: hidden;
+    padding: 0 !important;
+    background: linear-gradient(180deg, #06242a 0%, #0d1114 100%) !important;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45) !important;
+}
+
+.history-dialog .el-dialog__header {
+    display: none;
+}
+
+.history-dialog .el-dialog__body {
+    padding: 0 !important;
+}
+
+.history-box {
+    position: relative;
+    padding: 30px;
+    color: #fff;
+}
+
+.history-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0px 1px 7px 1px rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 10;
+    border:1px solid #fff;
+}
+
+.history-close-btn:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.history-header {
+    padding-right: 48px;
+    margin-bottom: 24px;
+}
+
+.history-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.history-subtitle {
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.history-group {
+    border: 1px solid rgba(0, 194, 184, 0.25);
+    border-radius: 18px;
+    background: rgba(0, 194, 184, 0.06);
+    padding: 18px;
+}
+
+.history-group-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: #00ddce;
+}
+
+.history-items {
+    display: grid;
+    gap: 12px;
+}
+
+.history-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 14px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.history-item-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.history-stock {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.history-stock-symbol {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.history-stock-name {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.history-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.history-item-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.history-label {
+    font-size: 15px;
+}
+
+.history-empty {
+    padding: 16px 0 8px;
+}
+
+.guess-history-btn {
+    margin-top:50px;
+    border: 1px solid #00c2b8;
+    background: linear-gradient(180deg, rgba(0, 194, 184, 0.18) 0%, rgba(0, 194, 184, 0.08) 100%);
+    color: #fff;
+    box-shadow: 0px 1px 7px 1px rgba(0, 194, 184, 0.15);
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.guess-history-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0px 10px 24px rgba(0, 194, 184, 0.18);
+}
+
 .language-btn:focus-visible{
     outline: none !important;
 }
@@ -366,6 +648,24 @@ onUnmounted(() => {
     .el-dialog.login-dialog {
         width: 95% !important;
         border-radius: 12px !important;
+    }
+
+    .el-dialog.history-dialog {
+        width: 95% !important;
+        border-radius: 12px !important;
+    }
+
+    .history-box {
+        padding: 20px;
+    }
+
+    .history-title {
+        font-size: 22px;
+    }
+
+    .history-item-main {
+        align-items: flex-start;
+        flex-direction: column;
     }
 }
 
@@ -455,7 +755,7 @@ input[type=number] {
     align-items: center;
     color: white;
     text-align: center;
-    font-size: 32px;
+    font-size: 46px;
     margin-top: 60px;
 }
 .banner-box{
@@ -786,12 +1086,16 @@ input[type=number] {
     -webkit-text-fill-color: transparent;
     line-height: normal;
 }
+
+.history-result{
+    font-size: 15px;
+}
 @media (max-width: 1400px) {
     #footer{
         width: 95%;
     }
 }
-@media (max-width: 1150px) {
+@media (max-width: 1280px) {
     .banner-box{
         width: 85%;
     }
@@ -801,11 +1105,12 @@ input[type=number] {
     }
 
     #banner{
+        font-size: 32px;
         height: 450px;
     }
 
     .stocks-li img{
-        width: 40%;
+        width: 30%;
     }
 
     .time-value,.time-separator{
@@ -838,6 +1143,10 @@ input[type=number] {
 
     .stocks-li{
         background-size: cover;
+    }
+
+    .stocks-name{
+        font-size: 18px;
     }
 
 }
@@ -926,6 +1235,16 @@ input[type=number] {
     }
     .banner-spec-text p{
         line-height: unset;
+    }
+    .history-title {
+        font-size: 18px;
+    }
+    .history-price {
+        font-size: 16px;
+
+    }
+    .guess-history-btn{
+        margin-top: 30px;
     }
 }
 
