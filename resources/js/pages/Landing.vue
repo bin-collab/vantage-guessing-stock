@@ -273,6 +273,7 @@ onUnmounted(() => {
       width="850px"
       class="login-dialog"
       :show-close="true"
+      :lock-scroll="false"
       destroy-on-close
       append-to-body
     >
@@ -316,6 +317,9 @@ onUnmounted(() => {
 </template>
 
 <style>
+.el-dropdown-menu__item:not(.is-disabled):hover, .el-dropdown-menu__item:not(.is-disabled):focus {
+    color: #000000;
+}
 .login-dialog {
     border-radius: 20px !important;
     overflow: hidden;
@@ -397,11 +401,11 @@ input[type=number] {
 }
 .header-box{
     width: 90%;
-    padding: 15px 0;
+    padding: 18px 0;
     display: inline-block;
 }
 .logo img{
-    height: 26.5px;
+    height: 40px;
 }
 .box{
     width: 1160px;
