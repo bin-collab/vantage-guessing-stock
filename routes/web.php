@@ -41,6 +41,6 @@ Route::get('/', function (GuessService $guessService) {
 Route::post('/login', 'App\Http\Controllers\AuthController@login');
 Route::post('/logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 
-Route::middleware(['opt-in-auth'])->group(function () {
+Route::middleware(['opt-in-auth', 'throttle:guess-submission'])->group(function () {
     Route::post('/guess', 'App\Http\Controllers\GuessController@store')->name('guess.store');
 });

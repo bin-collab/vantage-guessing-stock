@@ -55,6 +55,7 @@ const openGuessHistoryModal = () => {
 };
 
 const handleLogout = () => {
+    ElMessage.success('退出成功！');
     router.post('/logout');
 };
 
@@ -74,6 +75,7 @@ const handleLogin = () => {
     }
     loginForm.post('/login', {
         onSuccess: () => {
+            ElMessage.success('登入成功！')
             loginModalVisible.value = false;
         },
         onError: (errors: any) => {
@@ -112,7 +114,12 @@ const form = useForm({
     })),
 });
 
+const submitting = ref(false);
+
 const submitGuess = (index: number) => {
+    if (submitting.value) {
+        return;
+    }
     if (!user.value) {
         loginModalVisible.value = true;
         return;
@@ -122,13 +129,19 @@ const submitGuess = (index: number) => {
         ElMessage.error('請輸入價格')
         return;
     }
+    submitting.value = true;
     router.post('/guess', { guesses: [guess] }, {
         preserveScroll: true,
-        onSuccess: () => ElMessage.success('提交成功！'),
+        onSuccess: () => {
+            ElMessage.success('提交成功！');
+        },
         onError: (errors: any) => {
             if (errors.message) {
                 ElMessage.error(errors.message);
             }
+        },
+        onFinish: () => {
+            submitting.value = false;
         }
     });
 };
@@ -299,6 +312,8 @@ onUnmounted(() => {
                 </div>
             </div>
 
+            <button class="guess-history-btn" @click="openGuessHistoryModal" >我的預測紀錄</button>
+
             <div class="time-tips">
                 <div class="time-tips1">請在{{ props.settings?.daily_deadline || '18:00' }}(GMT+3)前提交估算的收市價。</div>
                 <div class="time-tips2">輸入產品收盤價的整數部分（例：若產品實際價格為 396.72，則預測 396 將被視為正確預測，而預測 397 則被視為錯誤預測）。</div>
@@ -308,19 +323,16 @@ onUnmounted(() => {
             <div class="stocks-box">
                 <ul class="stocks-ul">
                     <li class="stocks-li" v-for="(item, index) in stocksList" :key="item.id">
-                        <img :src="item.images" :alt="item.name">
                         <div class="stocks-li-flex">
                             <div class="stocks-name">{{ item.symbol }}</div>
-                            <input class="stocks-input" type="number" :placeholder="item.placeholder" v-model="form.guesses[index].guessed_price" :disabled="!canGuess">
+                            <input class="stocks-input" type="number" :placeholder="item.placeholder" v-model="form.guesses[index].guessed_price" :disabled="!canGuess || submitting">
                             <div class="stocks-control">
-                                <button class="stocks-submit" @click="submitGuess(index)" :disabled="!canGuess">提交</button>
-                                <button class="stocks-change" @click="submitGuess(index)" :disabled="!canGuess">更改</button>
+                                <button class="stocks-submit" @click="submitGuess(index)" :disabled="!canGuess || submitting">提交</button>
+                                <button class="stocks-change" @click="submitGuess(index)" :disabled="!canGuess || submitting">更改</button>
                             </div>
                         </div>
                     </li>
                 </ul>
-
-                <button class="guess-history-btn" @click="openGuessHistoryModal">我的竞猜记录</button>
             </div>
         </div>
 
@@ -342,7 +354,7 @@ onUnmounted(() => {
         <div class="history-box">
             <button class="history-close-btn" @click="guessHistoryModalVisible = false">&#10005;</button>
             <div class="history-header">
-                <div class="history-title">我的竞猜记录</div>
+                <div class="history-title">我的竞猜記錄</div>
             </div>
 
             <div v-if="guessHistoryGroups.length" class="history-list">
@@ -361,18 +373,9 @@ onUnmounted(() => {
                                 <div class="history-stock">
                                     <span class="history-stock-symbol">{{ record.stock.symbol }}</span>
                                 </div>
+                                 <div class="history-price">{{ record.guessed_price }}</div>
+                            </div>
 
-                            </div>
-                            <div class="history-item-meta">
-                                <span class="history-label">竞猜价格</span>
-                                <div class="history-price">{{ record.guessed_price }}</div>
-                            </div>
-                            <div class="history-item-meta">
-                                <span class="history-label">竞猜结果</span>
-                                <el-tag class="history-result" :type="formatGuessStatusType(record.is_correct)" effect="light" round>
-                                    {{ formatGuessStatus(record.is_correct) }}
-                                </el-tag>
-                            </div>
                         </div>
                     </div>
                 </section>
@@ -395,7 +398,13 @@ onUnmounted(() => {
     >
         <div class="login-box">
             <div class="login-left">
-                <div class="login-title">美股差價合約價格預測</div>
+                <div class="login-title-box">
+                    <div class="login-title">美股差價合約價格預測</div>
+                    <div class="login-subtitle">
+                        <p>參與預測股票收盤價，</p>
+                        <p>贏取兩張美元免費訂單券。</p>
+                    </div>
+                </div>
                 <img src="/images/login-img.webp" class="login-img"/>
             </div>
             <div class="login-right">
@@ -603,7 +612,7 @@ onUnmounted(() => {
 .history-price {
     font-size: 16px;
     font-weight: 700;
-    color: #fff;
+    color: #FF9800;
 }
 
 .history-item-meta {
@@ -623,9 +632,8 @@ onUnmounted(() => {
 }
 
 .guess-history-btn {
-    margin-top:50px;
+    margin-top:10px;
     border: 1px solid #00c2b8;
-    background: linear-gradient(180deg, rgba(0, 194, 184, 0.18) 0%, rgba(0, 194, 184, 0.08) 100%);
     color: #fff;
     box-shadow: 0px 1px 7px 1px rgba(0, 194, 184, 0.15);
     padding: 12px 24px;
@@ -633,6 +641,8 @@ onUnmounted(() => {
     font-size: 16px;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: linear-gradient(180deg, rgba(25, 108, 121, 0.7) 0%, #000000 100%);
+
 }
 
 .guess-history-btn:hover {
@@ -871,7 +881,9 @@ input[type=number] {
 }
 
 .stocks-box{
-    margin: 50px 0;
+    margin-bottom: 50px;
+    display:inline-block;
+    width: 90%;
 }
 .stocks-ul{
     display: grid;
@@ -903,10 +915,11 @@ input[type=number] {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    align-content: flex-start;
+    align-content: center;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
+    text-align: center;
 }
 
 .stocks-name{
@@ -980,7 +993,7 @@ input[type=number] {
 .login-box {
     display: flex;
     width: 100%;
-    min-height: 450px;
+    min-height: 490px;
     background: #FAFAFA;
     border-radius: 20px;
     overflow: hidden;
@@ -1069,15 +1082,22 @@ input[type=number] {
     border-color: #C74D23 !important;
 }
 
-.login-title{
+.login-title-box{
     position: absolute;
     color: #fff;
-    top: 40px;
+    top: 30px;
     left: 0;
     right: 0;
     margin: auto 0;
     text-align: center;
-    font-size: 28px;
+
+}
+.login-title{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.login-subtitle p{
+    font-size: 24px;
     font-weight: bold;
     background: linear-gradient(180deg, #FFFFFF 30.29%, #ED650D 100%);
     background-clip: text;
@@ -1187,7 +1207,7 @@ input[type=number] {
     }
 
     .stocks-box{
-        margin: 30px 0;
+        margin-bottom: 30px;
     }
 
     .stocks-name{
@@ -1244,7 +1264,8 @@ input[type=number] {
 
     }
     .guess-history-btn{
-        margin-top: 30px;
+        margin-top: 10px;
+        font-size: 14px;
     }
 }
 

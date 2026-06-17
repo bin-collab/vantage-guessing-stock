@@ -146,4 +146,47 @@ class GuessActivityTest extends TestCase
 
         $this->assertFalse($guess->fresh()->is_correct);
     }
+
+    public function test_guess_submission_is_rate_limited(): void
+    {
+        $user = OptInUser::create([
+            'email' => 'test@example.com',
+            'uid' => '12345',
+        ]);
+        $stock = Stock::create(['symbol' => 'TSLA.24H', 'name' => 'Tesla']);
+
+        Carbon::setTestNow(Carbon::parse('2026-07-06 10:00:00', '+03:00')); // Campaign active
+
+        // Simulate 30 successful requests
+        for ($i = 0; $i < 30; $i++) {
+            $response = $this->withSession(['opt_in_user_id' => $user->id])
+                ->post('/guess', [
+                    'guesses' => [
+                        ['stock_id' => $stock->id, 'guessed_price' => 200 + $i],
+                    ],
+                ]);
+            $response->assertStatus(302); // Redirect back on success
+        }
+
+        // The 31st request should be rate limited
+        $response = $this->withSession(['opt_in_user_id' => $user->id])
+            ->post('/guess', [
+                'guesses' => [
+                    ['stock_id' => $stock->id, 'guessed_price' => 300],
+                ],
+            ]);
+
+        $response->assertSessionHasErrors(['message']);
+
+        // Let's also check if JSON request gets 422 with validation error
+        $responseJson = $this->withSession(['opt_in_user_id' => $user->id])
+            ->postJson('/guess', [
+                'guesses' => [
+                    ['stock_id' => $stock->id, 'guessed_price' => 301],
+                ],
+            ]);
+
+        $responseJson->assertStatus(422);
+        $responseJson->assertJsonPath('errors.message', '操作過於頻繁，請稍後再試。');
+    }
 }
