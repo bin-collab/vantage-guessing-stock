@@ -1,0 +1,54 @@
+{
+    "language": "한국어",
+    "nav": {
+        "login_logout": "로그인 / 로그아웃"
+    },
+    "login": {
+        "uid_placeholder": "UID를 입력하세요.",
+        "email_placeholder": "등록된 이메일 주소를 입력하세요.",
+        "login_btn": "로그인",
+        "logout_btn": "로그아웃"
+    },
+    "notice": {
+        "eligibility": "2026년 6월 22일 ~ 6월 28일 기간 내 참여 신청(Opt-In)을 완료한 고객만 예측 제출이 가능합니다."
+    },
+    "timer": {
+        "remaining": "남은 시간",
+        "hour": "시.",
+        "minute": "분.",
+        "second": "초."
+    },
+    "history": {
+        "title": "나의 예측 기록",
+        "empty": "예측 기록이 없습니다",
+        "close_btn": "✕"
+    },
+    "tips": {
+        "submit_deadline": "매일 {deadline} (GMT+3) 이전까지 종가 예측을 제출해 주세요.",
+        "integer_desc": "예상 종가의 정수 부분만 입력해 주세요.\n(예: 실제 가격이 396.72인 경우 → 396 입력)",
+        "closing_time_weekday": "오늘의 종가는 MT5 VantageMarkets-Live 시스템 기준 23:59에 기록됩니다.",
+        "closing_time_friday": "오늘의 종가는 MT5 VantageMarkets-Live 시스템 기준 23:55에 기록됩니다."
+    },
+    "stocks": {
+        "submit": "제출",
+        "revise": "수정"
+    },
+    "footer": {
+        "risk_warning": "위험 경고: CFD는 복잡한 금융 상품이며 레버리지로 인해 단기간에 빠르게 손실이 발생할 위험이 높습니다. 거래를 시작하기 전에 관련 위험을 충분히 이해하셨는지 확인하시기 바랍니다."
+    },
+    "messages": {
+        "logout_success": "로그아웃 성공!",
+        "enter_email": "이메일을 입력하세요",
+        "enter_uid": "UID를 입력하세요",
+        "login_success": "로그인 성공!",
+        "enter_price": "가격을 입력하세요",
+        "submit_success": "제출 성공!",
+        "banner_title": "미국 주식 CFD 가격 예측",
+        "banner_desc_1": "주식 종가 예측에 참여하여,",
+        "banner_desc_2": "2달러 무료 주문 쿠폰을 받으세요."
+    },
+    "errors": {
+        "invalid_credentials": "잘못된 이메일 또는 UID입니다. 정보를 확인해 주세요.",
+        "guessing_closed": "오늘의 예측이 마감되었습니다 (마감 시간: {deadline} GMT+3)."
+    }
+}

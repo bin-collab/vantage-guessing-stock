@@ -1,0 +1,54 @@
+{
+    "language": "简体中文",
+    "nav": {
+        "login_logout": "登录/登出"
+    },
+    "login": {
+        "uid_placeholder": "请输入你的UID。",
+        "email_placeholder": "请输入你的注册电子邮箱地址。",
+        "login_btn": "登录",
+        "logout_btn": "退出登录"
+    },
+    "notice": {
+        "eligibility": "仅限于2026年6月22日至2026年6月28日期间内成功报名的客户，方有资格参与预测期间活动。"
+    },
+    "timer": {
+        "remaining": "剩余时间",
+        "hour": "时",
+        "minute": "分",
+        "second": "秒"
+    },
+    "history": {
+        "title": "我的预测记录",
+        "empty": "暂无预测记录",
+        "close_btn": "✕"
+    },
+    "tips": {
+        "submit_deadline": "请在{deadline}（GMT+3）前提交预测的收盘价。",
+        "integer_desc": "输入产品收盘价的整数部分（例如：若产品实际价格为396.72，则预测396将被视为正确预测，而预测397则被视为错误预测）。",
+        "closing_time_weekday": "*当日收盘价以 MT5 VantageMarkets-Live 系统时间23:59为准。",
+        "closing_time_friday": "*当日收盘价以 MT5 VantageMarkets-Live 系统时间23:55为准。"
+    },
+    "stocks": {
+        "submit": "提交",
+        "revise": "更改"
+    },
+    "footer": {
+        "risk_warning": "风险提示： 差价合约（CFD）属于复杂的金融工具，由于杠杆作用，存在快速亏损资金的高风险。交易前请确保您已充分了解相关风险。"
+    },
+    "messages": {
+        "logout_success": "退出成功！",
+        "enter_email": "请输入 Email",
+        "enter_uid": "请输入 UID",
+        "login_success": "登录成功！",
+        "enter_price": "请输入价格",
+        "submit_success": "提交成功！",
+        "banner_title": "美股差价合约价格预测",
+        "banner_desc_1": "参与预测股票收盘价，",
+        "banner_desc_2": "赢取两张美元免费订单券。"
+    },
+    "errors": {
+        "invalid_credentials": "无效的电子邮件或 UID，请检查您的信息。",
+        "guessing_closed": "今日预测已关闭（截止时间：{deadline} GMT+3）。"
+    }
+}

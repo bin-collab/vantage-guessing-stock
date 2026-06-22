@@ -3,8 +3,15 @@
 namespace App\Filament\Resources\ClosingPrices\Pages;
 
 use App\Filament\Resources\ClosingPrices\ClosingPriceResource;
+use App\Models\ClosingPrice;
+use App\Models\Stock;
+use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Schemas\Components\Grid;
 
 class ListClosingPrices extends ListRecords
 {
@@ -13,19 +20,19 @@ class ListClosingPrices extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\Action::make('batch_create')
+            Action::make('batch_create')
                 ->label('录入每日收盘价')
                 ->icon('heroicon-o-plus-circle')
                 ->form([
-                    \Filament\Forms\Components\DatePicker::make('date')
+                    DatePicker::make('date')
                         ->label('收盘日期')
                         ->default(now())
                         ->required(),
-                    \Filament\Schemas\Components\Grid::make(3)
+                    Grid::make(3)
                         ->schema(function () {
-                            return \App\Models\Stock::all()->map(function ($stock) {
-                                return \Filament\Forms\Components\TextInput::make('prices.' . $stock->id)
-                                    ->label($stock->name . ' (' . $stock->symbol . ')')
+                            return Stock::all()->map(function ($stock) {
+                                return TextInput::make('prices.'.$stock->id)
+                                    ->label($stock->name.' ('.$stock->symbol.')')
                                     ->numeric()
                                     ->required()
                                     ->minValue(0)
@@ -35,7 +42,7 @@ class ListClosingPrices extends ListRecords
                 ])
                 ->action(function (array $data): void {
                     foreach ($data['prices'] as $stockId => $price) {
-                        \App\Models\ClosingPrice::updateOrCreate(
+                        ClosingPrice::updateOrCreate(
                             [
                                 'stock_id' => $stockId,
                                 'date' => $data['date'],
@@ -45,7 +52,7 @@ class ListClosingPrices extends ListRecords
                             ]
                         );
                     }
-                    \Filament\Notifications\Notification::make()
+                    Notification::make()
                         ->title('每日收盘价已保存，校验逻辑已自动运行。')
                         ->success()
                         ->send();

@@ -1,0 +1,54 @@
+{
+    "language": "Bahasa Melayu",
+    "nav": {
+        "login_logout": "Log Masuk / Log Keluar"
+    },
+    "login": {
+        "uid_placeholder": "Masukkan UID anda.",
+        "email_placeholder": "Masukkan alamat emel berdaftar anda.",
+        "login_btn": "Log Masuk",
+        "logout_btn": "Log Keluar"
+    },
+    "notice": {
+        "eligibility": "Hanya pelanggan yang membuat opt-in antara 22–28 Jun 2026 layak menghantar tekaan."
+    },
+    "timer": {
+        "remaining": "Baki masa",
+        "hour": "Jam",
+        "minute": "Min",
+        "second": "Saat"
+    },
+    "history": {
+        "title": "Rekod Ramalan Saya",
+        "empty": "Tiada rekod ramalan",
+        "close_btn": "✕"
+    },
+    "tips": {
+        "submit_deadline": "Sila hantar tekaan harga penutupan sebelum {deadline} (GMT+3).",
+        "integer_desc": "Masukkan bahagian integer bagi harga penutupan yang anda jangka (contohnya, masukkan 396 untuk harga 396.72).",
+        "closing_time_weekday": "Harga penutupan hari ini akan direkodkan pada 23:59 oleh sistem MT5 VantageMarkets-Live.",
+        "closing_time_friday": "Harga penutupan hari ini akan direkodkan pada 23:55 oleh sistem MT5 VantageMarkets-Live."
+    },
+    "stocks": {
+        "submit": "Hantar",
+        "revise": "Semak Semula"
+    },
+    "footer": {
+        "risk_warning": "Amaran Risiko: CFD adalah instrumen yang kompleks dan mempunyai risiko kehilangan wang dengan cepat disebabkan oleh leveraj. Pastikan anda memahami sepenuhnya risiko yang terlibat sebelum berdagang."
+    },
+    "messages": {
+        "logout_success": "Log keluar berjaya!",
+        "enter_email": "Sila masukkan emel",
+        "enter_uid": "Sila masukkan UID",
+        "login_success": "Log masuk berjaya!",
+        "enter_price": "Sila masukkan harga",
+        "submit_success": "Hantar berjaya!",
+        "banner_title": "Ramalan Harga CFD Saham AS",
+        "banner_desc_1": "Sertai ramalan harga penutupan saham,",
+        "banner_desc_2": "menang dua kupon pesanan percuma USD."
+    },
+    "errors": {
+        "invalid_credentials": "Emel atau UID tidak sah. Sila semak maklumat anda.",
+        "guessing_closed": "Ramalan ditutup untuk hari ini (Tarikh akhir: {deadline} GMT+3)."
+    }
+}

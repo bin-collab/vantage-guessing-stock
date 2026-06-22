@@ -1,6 +1,54 @@
 {
     "language": "English",
-    "login": "Login",
-    "uidPlaceholder": "Please enter your UID.",
-    "emailPlaceholder": "Please enter your registered email address."
+    "nav": {
+        "login_logout": "Log In / Log Out"
+    },
+    "login": {
+        "uid_placeholder": "Enter your UID.",
+        "email_placeholder": "Enter your registered email address.",
+        "login_btn": "Log In",
+        "logout_btn": "Log Out"
+    },
+    "notice": {
+        "eligibility": "Only clients who opted in between 22–28 June 2026 are eligible to submit guesses."
+    },
+    "timer": {
+        "remaining": "Remaining Time",
+        "hour": "Hr.",
+        "minute": "Min.",
+        "second": "Sec."
+    },
+    "history": {
+        "title": "My Guess Records",
+        "empty": "No records found",
+        "close_btn": "✕"
+    },
+    "tips": {
+        "submit_deadline": "Please submit your closing price guesses by {deadline} (GMT+3).",
+        "integer_desc": "Enter the integer part of your predicted closing price (e.g., enter 396 for a price of 396.72).",
+        "closing_time_weekday": "Today’s closing prices will be recorded at 23:59 by the MT5 VantageMarkets-Live system.",
+        "closing_time_friday": "Today’s closing prices will be recorded at 23:55 by the MT5 VantageMarkets-Live system."
+    },
+    "stocks": {
+        "submit": "Submit",
+        "revise": "Revise"
+    },
+    "footer": {
+        "risk_warning": "Risk Warning: CFDs are complex instruments and come with a high risk of losing money rapidly due to leverage. Please ensure you fully understand the risks involved before trading."
+    },
+    "messages": {
+        "logout_success": "Logged out successfully!",
+        "enter_email": "Please enter email",
+        "enter_uid": "Please enter UID",
+        "login_success": "Logged in successfully!",
+        "enter_price": "Please enter price",
+        "submit_success": "Submitted successfully!",
+        "banner_title": "US Stock CFD Price Guess",
+        "banner_desc_1": "Predict stock closing prices,",
+        "banner_desc_2": "and win two USD free order vouchers."
+    },
+    "errors": {
+        "invalid_credentials": "Invalid email or UID. Please check your information.",
+        "guessing_closed": "Guessing is closed for today (Deadline: {deadline} GMT+3)."
+    }
 }

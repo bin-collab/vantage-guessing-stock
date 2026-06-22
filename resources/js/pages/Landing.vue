@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head, Link, useForm, router, usePage } from '@inertiajs/vue3';
+import { Head, useForm, router, usePage } from '@inertiajs/vue3';
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ElMessage } from 'element-plus'
@@ -33,9 +33,37 @@ const props = defineProps<{
 const page = usePage();
 const user = computed(() => page.props.auth?.user as any);
 
-const { locale } = useI18n();
+const { locale, t } = useI18n();
+const languageNames: Record<string, string> = {
+    zh: '繁體中文',
+    cn: '简体中文',
+    en: 'English',
+    ms: 'Bahasa Melayu',
+    tl: 'Tagalog',
+    id: 'Indonesia',
+    ru: 'русский',
+    mn: 'Монгол',
+    uz: "O'zbek",
+    kk: 'қазақ тілі',
+    vi: 'tiếng Việt',
+    ko: '한국어',
+};
+
 const changeLanguage = (command: string) => {
     locale.value = command;
+    localStorage.setItem('locale', command);
+};
+
+const translateError = (errorMsg: string): string => {
+    if (!errorMsg) return '';
+    if (errorMsg.includes('Invalid email or UID. Please check your information.')) {
+        return t('errors.invalid_credentials');
+    }
+    if (errorMsg.includes('Guessing is closed for today')) {
+        const deadline = props.settings?.daily_deadline || '18:00';
+        return t('errors.guessing_closed', { deadline });
+    }
+    return errorMsg;
 };
 
 const loginModalVisible = ref(false);
@@ -55,7 +83,7 @@ const openGuessHistoryModal = () => {
 };
 
 const handleLogout = () => {
-    ElMessage.success('退出成功！');
+    ElMessage.success(t('messages.logout_success'));
     router.post('/logout');
 };
 
@@ -66,21 +94,21 @@ const loginForm = useForm({
 
 const handleLogin = () => {
     if (!loginForm.email) {
-        ElMessage.error('請輸入 Email')
+        ElMessage.error(t('messages.enter_email'));
         return;
     }
     if (!loginForm.uid) {
-        ElMessage.error('請輸入 UID')
+        ElMessage.error(t('messages.enter_uid'));
         return;
     }
     loginForm.post('/login', {
         onSuccess: () => {
-            ElMessage.success('登入成功！')
+            ElMessage.success(t('messages.login_success'));
             loginModalVisible.value = false;
         },
         onError: (errors: any) => {
             if (errors.email) {
-                ElMessage.error(errors.email);
+                ElMessage.error(translateError(errors.email));
             }
         }
     });
@@ -126,18 +154,18 @@ const submitGuess = (index: number) => {
     }
     const guess = form.guesses[index];
     if (!guess.guessed_price) {
-        ElMessage.error('請輸入價格')
+        ElMessage.error(t('messages.enter_price'));
         return;
     }
     submitting.value = true;
     router.post('/guess', { guesses: [guess] }, {
         preserveScroll: true,
         onSuccess: () => {
-            ElMessage.success('提交成功！');
+            ElMessage.success(t('messages.submit_success'));
         },
         onError: (errors: any) => {
             if (errors.message) {
-                ElMessage.error(errors.message);
+                ElMessage.error(translateError(errors.message));
             }
         },
         onFinish: () => {
@@ -185,7 +213,21 @@ const updateCountdown = () => {
 
 const todayDateFormatted = computed(() => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Riyadh' };
-    return new Date().toLocaleDateString('zh-CN', options);
+    const localeMap: Record<string, string> = {
+        zh: 'zh-TW',
+        cn: 'zh-CN',
+        en: 'en-US',
+        ms: 'ms-MY',
+        tl: 'tl-PH',
+        id: 'id-ID',
+        ru: 'ru-RU',
+        mn: 'mn-MN',
+        uz: 'uz-UZ',
+        kk: 'kk-KZ',
+        vi: 'vi-VN',
+        ko: 'ko-KR',
+    };
+    return new Date().toLocaleDateString(localeMap[locale.value] || 'zh-TW', options);
 });
 
 const guessHistoryGroups = computed(() => {
@@ -204,26 +246,41 @@ const guessHistoryGroups = computed(() => {
 });
 
 const formatGuessDate = (guessDate: string): string => {
-    return guessDate.split('T')[0];
-};
+    if (!guessDate) return '';
+    const dateStr = guessDate.split('T')[0];
+    const parts = dateStr.split('-');
+    if (parts.length === 3) {
+        const year = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1; // 0-indexed month
+        const day = parseInt(parts[2], 10);
+        const date = new Date(year, month, day);
 
-const formatGuessStatus = (isCorrect: boolean | null): string => {
-    if (isCorrect === null) {
-        return '待结算';
+        const localeMap: Record<string, string> = {
+            zh: 'zh-TW',
+            cn: 'zh-CN',
+            en: 'en-US',
+            ms: 'ms-MY',
+            tl: 'tl-PH',
+            id: 'id-ID',
+            ru: 'ru-RU',
+            mn: 'mn-MN',
+            uz: 'uz-UZ',
+            kk: 'kk-KZ',
+            vi: 'vi-VN',
+            ko: 'ko-KR',
+        };
+        const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString(localeMap[locale.value] || 'zh-TW', options);
     }
-
-    return isCorrect ? '已命中' : '未命中';
+    return guessDate;
 };
 
-const formatGuessStatusType = (isCorrect: boolean | null): 'success' | 'warning' | 'info' => {
-    if (isCorrect === null) {
-        return 'warning';
-    }
-
-    return isCorrect ? 'success' : 'info';
-};
 
 onMounted(() => {
+    const savedLocale = localStorage.getItem('locale');
+    if (savedLocale) {
+        locale.value = savedLocale;
+    }
     updateCountdown();
     timer = setInterval(updateCountdown, 1000);
 });
@@ -245,7 +302,7 @@ onUnmounted(() => {
 
                 <div class="menu">
                     <template v-if="!user">
-                        <button class="login-btn" @click="openloginModal"><img src="/images/login-ico.jpg"/>{{ $t('login') }}</button>
+                        <button class="login-btn" @click="openloginModal"><img src="/images/login-ico.jpg"/>{{ t('login.login_btn') }}</button>
                     </template>
                     <template v-else>
                         <el-dropdown @command="handleLogout">
@@ -254,19 +311,24 @@ onUnmounted(() => {
                             </div>
                             <template #dropdown>
                                 <el-dropdown-menu>
-                                    <el-dropdown-item command="logout">退出登錄</el-dropdown-item>
+                                    <el-dropdown-item command="logout">{{ t('login.logout_btn') }}</el-dropdown-item>
                                 </el-dropdown-menu>
                             </template>
                         </el-dropdown>
                     </template>
                     <el-dropdown @command="changeLanguage">
                         <div style="cursor: pointer; display: flex; align-items: center; gap: 4px;" class="language-btn">
-                            {{ locale === 'zh' ? '中文' : 'English' }}
+                            {{ languageNames[locale] || 'English' }}
                         </div>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item command="zh">中文</el-dropdown-item>
-                                <el-dropdown-item command="en">English</el-dropdown-item>
+                                <el-dropdown-item
+                                    v-for="(name, code) in languageNames"
+                                    :key="code"
+                                    :command="code"
+                                >
+                                    {{ name }}
+                                </el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
@@ -277,47 +339,51 @@ onUnmounted(() => {
 
     <section id="banner">
         <div class="banner-box">
-            <div class="banner-text">美股差價合約價格預測</div>
-            <div class="banner-spec-text">
-                <p>參與預測股票收盤價，</p>
-                <p>贏取兩張美元免費訂單券。</p>
+            <div class="banner-content">
+                <div class="banner-text">{{ t('messages.banner_title') }}</div>
+                <div class="banner-spec-text">
+                    <p>{{ t('messages.banner_desc_1') }}</p>
+                    <p>{{ t('messages.banner_desc_2') }}</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="container">
         <div class="box">
-            <div class="top-text">僅限於2026年6月22日至2026年6月28日期間內成功報名的客戶，方有資格參與預測期間活動。</div>
+            <div class="top-text">{{ t('notice.eligibility') }}</div>
             <div class="cur-date">
                 <div class="cur-date-flex"><img src="/images/date.svg"/>{{ todayDateFormatted }}</div>
             </div>
 
             <div class="remaining-time">
-                <div class="time-title">尚餘時間</div>
+                <div class="time-title">{{ t('timer.remaining') }}</div>
                 <div class="time-display">
                     <div class="time-block">
                         <div class="time-value">{{ hoursLeft }}</div>
-                        <div class="time-label">時</div>
+                        <div class="time-label">{{ t('timer.hour') }}</div>
                     </div>
                     <div class="time-separator">:</div>
                     <div class="time-block">
                         <div class="time-value">{{ minutesLeft }}</div>
-                        <div class="time-label">分</div>
+                        <div class="time-label">{{ t('timer.minute') }}</div>
                     </div>
                     <div class="time-separator">:</div>
                     <div class="time-block">
                         <div class="time-value">{{ secondsLeft }}</div>
-                        <div class="time-label">秒</div>
+                        <div class="time-label">{{ t('timer.second') }}</div>
                     </div>
                 </div>
             </div>
 
-            <button class="guess-history-btn" @click="openGuessHistoryModal" >我的預測紀錄</button>
+            <button class="guess-history-btn" @click="openGuessHistoryModal" >{{ t('history.title') }}</button>
 
             <div class="time-tips">
-                <div class="time-tips1">請在{{ props.settings?.daily_deadline || '18:00' }}(GMT+3)前提交估算的收市價。</div>
-                <div class="time-tips2">輸入產品收盤價的整數部分（例：若產品實際價格為 396.72，則預測 396 將被視為正確預測，而預測 397 則被視為錯誤預測）。</div>
-                <div class="time-tips3">*本日收市價以MT5VantageMarkets-Live系統時間23:59為準。</div>
+                <div class="time-tips1">{{ t('tips.submit_deadline', { deadline: props.settings?.daily_deadline || '18:00' }) }}</div>
+                <div class="time-tips2">{{ t('tips.integer_desc') }}</div>
+                <div class="time-tips3">
+                    {{ new Date().getDay() === 5 ? t('tips.closing_time_friday') : t('tips.closing_time_weekday') }}
+                </div>
             </div>
 
             <div class="stocks-box">
@@ -327,8 +393,8 @@ onUnmounted(() => {
                             <div class="stocks-name">{{ item.symbol }}</div>
                             <input class="stocks-input" type="number" :placeholder="item.placeholder" v-model="form.guesses[index].guessed_price" :disabled="!canGuess || submitting">
                             <div class="stocks-control">
-                                <button class="stocks-submit" @click="submitGuess(index)" :disabled="!canGuess || submitting">提交</button>
-                                <button class="stocks-change" @click="submitGuess(index)" :disabled="!canGuess || submitting">更改</button>
+                                <button class="stocks-submit" @click="submitGuess(index)" :disabled="!canGuess || submitting">{{ t('stocks.submit') }}</button>
+                                <button class="stocks-change" @click="submitGuess(index)" :disabled="!canGuess || submitting">{{ t('stocks.revise') }}</button>
                             </div>
                         </div>
                     </li>
@@ -337,7 +403,7 @@ onUnmounted(() => {
         </div>
 
         <div id="footer">
-            風險提示： 差價合約（CFD）屬於複雜的金融工具，由於槓桿作用，存在快速虧損資金的高風險。交易前請確保您已充分了解相關風險。
+            {{ t('footer.risk_warning') }}
         </div>
     </section>
 
@@ -354,7 +420,7 @@ onUnmounted(() => {
         <div class="history-box">
             <button class="history-close-btn" @click="guessHistoryModalVisible = false">&#10005;</button>
             <div class="history-header">
-                <div class="history-title">我的竞猜記錄</div>
+                <div class="history-title">{{ t('history.title') }}</div>
             </div>
 
             <div v-if="guessHistoryGroups.length" class="history-list">
@@ -382,7 +448,7 @@ onUnmounted(() => {
             </div>
 
             <div v-else class="history-empty">
-                <el-empty description="暂无竞猜记录" />
+                <el-empty :description="t('history.empty')" />
             </div>
         </div>
     </el-dialog>
@@ -399,10 +465,10 @@ onUnmounted(() => {
         <div class="login-box">
             <div class="login-left">
                 <div class="login-title-box">
-                    <div class="login-title">美股差價合約價格預測</div>
+                    <div class="login-title">{{ t('messages.banner_title') }}</div>
                     <div class="login-subtitle">
-                        <p>參與預測股票收盤價，</p>
-                        <p>贏取兩張美元免費訂單券。</p>
+                        <p>{{ t('messages.banner_desc_1') }}</p>
+                        <p>{{ t('messages.banner_desc_2') }}</p>
                     </div>
                 </div>
                 <img src="/images/login-img.webp" class="login-img"/>
@@ -424,15 +490,15 @@ onUnmounted(() => {
                 </div> -->
                 <div class="form">
                     <el-form :model="loginForm">
-                        <div class="mobile-login-title">美股差價合約價格預測</div>
+                        <div class="mobile-login-title">{{ t('messages.banner_title') }}</div>
                         <el-form-item>
-                            <el-input v-model="loginForm.uid" placeholder="請輸入你的UID。"></el-input>
+                            <el-input v-model="loginForm.uid" :placeholder="t('login.uid_placeholder')"></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-input v-model="loginForm.email" placeholder="請輸入你的註冊電郵地址。"></el-input>
+                            <el-input v-model="loginForm.email" :placeholder="t('login.email_placeholder')"></el-input>
                         </el-form-item>
                         <el-form-item class="login-item">
-                            <el-button type="primary" class="login-submit" @click="handleLogin">登入</el-button>
+                            <el-button type="primary" class="login-submit" @click="handleLogin">{{ t('login.login_btn') }}</el-button>
                         </el-form-item>
                     </el-form>
                 </div>
@@ -766,14 +832,22 @@ input[type=number] {
     color: white;
     text-align: center;
     font-size: 46px;
-    margin-top: 60px;
+    margin-top: 70px;
 }
 .banner-box{
     text-align: left;
     width: 1200px;
 }
+.banner-content{
+    max-width: 600px;
+}
 .banner-text{
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: bold;
+}
+.banner-spec-text {
+    font-size: clamp(16px, 1.8vw, 58px);
 }
 .banner-spec-text p{
     background: linear-gradient(180deg, #FFFFFF 30.29%, #ED650D 100%);
@@ -781,7 +855,7 @@ input[type=number] {
     -webkit-background-clip: text;
     font-weight: bold;
     -webkit-text-fill-color: transparent;
-    line-height: normal;
+    line-height: 1.3;
 }
 
 #container{
@@ -1182,6 +1256,16 @@ input[type=number] {
     #banner{
         height: 250px;
         font-size: 18px;
+    }
+    .banner-content{
+        max-width: 100%;
+    }
+    .banner-text {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+    .banner-spec-text {
+        font-size: 13px;
     }
 
     .time-tips1{

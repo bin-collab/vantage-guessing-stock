@@ -15,7 +15,7 @@ class OptInAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->session()->has('opt_in_user_id')) {
+        if (! $request->session()->has('opt_in_user_id')) {
             return redirect()->route('login');
         }
 

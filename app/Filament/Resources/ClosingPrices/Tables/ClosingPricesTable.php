@@ -5,6 +5,8 @@ namespace App\Filament\Resources\ClosingPrices\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
 class ClosingPricesTable
@@ -13,23 +15,23 @@ class ClosingPricesTable
     {
         return $table
             ->columns([
-                \Filament\Tables\Columns\TextColumn::make('stock.symbol')
+                TextColumn::make('stock.symbol')
                     ->label('Stock')
                     ->sortable(),
-                \Filament\Tables\Columns\TextColumn::make('date')
+                TextColumn::make('date')
                     ->date()
                     ->sortable(),
-                \Filament\Tables\Columns\TextColumn::make('price')
+                TextColumn::make('price')
                     ->numeric()
                     ->sortable(),
-                \Filament\Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultGroup('date')
             ->groups([
-                \Filament\Tables\Grouping\Group::make('date')
+                Group::make('date')
                     ->label('按日期分组')
                     ->date(),
             ])

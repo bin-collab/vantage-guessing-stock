@@ -1,0 +1,54 @@
+{
+    "language": "tiếng Việt",
+    "nav": {
+        "login_logout": "Đăng nhập/Đăng xuất"
+    },
+    "login": {
+        "uid_placeholder": "Nhập vào UID của bạn",
+        "email_placeholder": "Nhập địa chỉ email bạn đã đăng ký",
+        "login_btn": "Đăng nhập",
+        "logout_btn": "Đăng xuất"
+    },
+    "notice": {
+        "eligibility": "Chỉ những khách hàng đã đăng ký tham gia từ ngày 22 đến ngày 28/06/2026 mới đủ điều kiện để gửi dự đoán."
+    },
+    "timer": {
+        "remaining": "Thời gian còn lại",
+        "hour": "Giờ.",
+        "minute": "Phút.",
+        "second": "Giây."
+    },
+    "history": {
+        "title": "Lịch sử dự đoán của tôi",
+        "empty": "Không có lịch sử dự đoán",
+        "close_btn": "✕"
+    },
+    "tips": {
+        "submit_deadline": "Vui lòng gửi dự đoán giá đóng cửa của bạn trước {deadline} (GMT+3).",
+        "integer_desc": "Nhập phần số nguyên của giá đóng cửa dự đoán của bạn (Ví dụ: nhập 396 cho mức giá 396.72)",
+        "closing_time_weekday": "Giá đóng cửa của ngày hôm nay sẽ được ghi nhận vào lúc 23:59 bởi hệ thống MT5 VantageMarkets-Live",
+        "closing_time_friday": "Giá đóng cửa của ngày hôm nay sẽ được ghi nhận vào lúc 23:55 bởi hệ thống MT5 VantageMarkets-Live"
+    },
+    "stocks": {
+        "submit": "Gửi",
+        "revise": "Sửa đổi"
+    },
+    "footer": {
+        "risk_warning": "Cảnh báo Rủi ro: CFD là công cụ phức tạp và có nguy cơ mất tiền nhanh chóng do đòn bẩy. Vui lòng đảm bảo bạn đã hiểu rõ các rủi ro liên quan trước khi giao dịch."
+    },
+    "messages": {
+        "logout_success": "Đăng xuất thành công!",
+        "enter_email": "Vui lòng nhập email",
+        "enter_uid": "Vui lòng nhập UID",
+        "login_success": "Đăng nhập thành công!",
+        "enter_price": "Vui lòng nhập giá",
+        "submit_success": "Gửi thành công!",
+        "banner_title": "Dự đoán giá CFD Cổ phiếu Mỹ",
+        "banner_desc_1": "Tham gia dự đoán giá đóng cửa cổ phiếu,",
+        "banner_desc_2": "nhận ngay hai phiếu đặt lệnh miễn phí bằng USD."
+    },
+    "errors": {
+        "invalid_credentials": "Email hoặc UID không hợp lệ. Vui lòng kiểm tra lại thông tin.",
+        "guessing_closed": "Dự đoán đã đóng hôm nay (Hạn chót: {deadline} GMT+3)."
+    }
+}

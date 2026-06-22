@@ -2,17 +2,14 @@
 
 namespace App\Filament\Resources\OptInUsers\RelationManagers;
 
-use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\DissociateAction;
-use Filament\Actions\DissociateBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -42,7 +39,7 @@ class GuessesRelationManager extends RelationManager
                     ->date(),
                 TextColumn::make('guessed_price')
                     ->label('竞猜价格'),
-                \Filament\Tables\Columns\IconColumn::make('is_correct')
+                IconColumn::make('is_correct')
                     ->label('是否中奖')
                     ->boolean(),
             ])

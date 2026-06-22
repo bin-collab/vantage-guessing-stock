@@ -1,0 +1,54 @@
+{
+    "language": "O'zbek",
+    "nav": {
+        "login_logout": "Kirish / Chiqish"
+    },
+    "login": {
+        "uid_placeholder": "UID’ingizni kiriting.",
+        "email_placeholder": "Ro‘yxatdan o‘tgan elektron pochta manzilingizni kiriting.",
+        "login_btn": "Kirish",
+        "logout_btn": "Chiqish"
+    },
+    "notice": {
+        "eligibility": "Faqat 2026-yil 22–28-iyun oralig‘ida qo'shilgan mijozlargina taxmin yuborish huquqiga ega."
+    },
+    "timer": {
+        "remaining": "Qolgan vaqt",
+        "hour": "Soat.",
+        "minute": "Daqiqa.",
+        "second": "Soniya."
+    },
+    "history": {
+        "title": "Mening taxminlarim tarixi",
+        "empty": "Taxminlar tarixi mavjud emas",
+        "close_btn": "✕"
+    },
+    "tips": {
+        "submit_deadline": "Iltimos, yopilish narxi bo‘yicha taxminlaringizni {deadline} (GMT+3) gacha yuboring.",
+        "integer_desc": "Taxmin qilinayotgan yopilish narxining butun son qismini kiriting (masalan, narx 396.72 bo‘lsa, 396 kiriting).",
+        "closing_time_weekday": "Bugungi yopilish narxlari MT5 VantageMarkets-Live tizimida 23:59 da qayd etiladi.",
+        "closing_time_friday": "Bugungi yopilish narxlari MT5 VantageMarkets-Live tizimida 23:55 da qayd etiladi."
+    },
+    "stocks": {
+        "submit": "Yuborish",
+        "revise": "Tahrirlash"
+    },
+    "footer": {
+        "risk_warning": "Xavf haqida ogohlantirish: CFDlar murakkab instrumentlar hisoblanadi va leveraj tufayli pulni tezda yo'qotish xavfi yuqori. Savdo qilishdan oldin tegishli xavflarni to'liq tushunganingizga ishonch hosil qiling."
+    },
+    "messages": {
+        "logout_success": "Tizimdan muvaffaqiyatli chiqildi!",
+        "enter_email": "Iltimos, elektron pochtani kiriting",
+        "enter_uid": "Iltimos, UID kiriting",
+        "login_success": "Tizimga muvaffaqiyatli kirildi!",
+        "enter_price": "Iltimos, narxni kiriting",
+        "submit_success": "Muvaffaqiyatli yuborildi!",
+        "banner_title": "AQSh aksiyalari CFD narxini taxmin qilish",
+        "banner_desc_1": "Aksiyaning yopilish narxini taxmin qilishda ishtirok eting va",
+        "banner_desc_2": "ikkita bepul AQSh dollari qiymatidagi buyurtma vaucherini yutib oling."
+    },
+    "errors": {
+        "invalid_credentials": "Elektron pochta yoki UID noto‘g‘ri. Iltimos, ma’lumotlaringizni tekshiring.",
+        "guessing_closed": "Bugun uchun taxminlar yopildi (Muddati: {deadline} GMT+3)."
+    }
+}

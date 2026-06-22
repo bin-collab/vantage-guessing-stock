@@ -2,6 +2,10 @@
 
 namespace App\Filament\Resources\Guesses\Schemas;
 
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
 class GuessForm
@@ -10,18 +14,18 @@ class GuessForm
     {
         return $schema
             ->components([
-                \Filament\Forms\Components\Select::make('opt_in_user_id')
+                Select::make('opt_in_user_id')
                     ->relationship('user', 'email')
                     ->required(),
-                \Filament\Forms\Components\Select::make('stock_id')
+                Select::make('stock_id')
                     ->relationship('stock', 'symbol')
                     ->required(),
-                \Filament\Forms\Components\DatePicker::make('guess_date')
+                DatePicker::make('guess_date')
                     ->required(),
-                \Filament\Forms\Components\TextInput::make('guessed_price')
+                TextInput::make('guessed_price')
                     ->numeric()
                     ->required(),
-                \Filament\Forms\Components\Toggle::make('is_correct')
+                Toggle::make('is_correct')
                     ->disabled(),
             ]);
     }

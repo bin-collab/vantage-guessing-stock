@@ -1,6 +1,54 @@
 {
-    "language": "中文",
-    "login": "登入",
-    "uidPlaceholder": "請輸入你的UID。",
-    "emailPlaceholder": "請輸入你的註冊電郵地址。"
+    "language": "繁體中文",
+    "nav": {
+        "login_logout": "登入/登出"
+    },
+    "login": {
+        "uid_placeholder": "請輸入你的UID。",
+        "email_placeholder": "請輸入你的註冊電郵地址。",
+        "login_btn": "登入",
+        "logout_btn": "退出登錄"
+    },
+    "notice": {
+        "eligibility": "僅限於2026年6月22日至2026年6月28日期間內成功報名的客戶，方有資格參與預測期間活動。"
+    },
+    "timer": {
+        "remaining": "剩餘時間",
+        "hour": "時",
+        "minute": "分",
+        "second": "秒"
+    },
+    "history": {
+        "title": "我的預測紀錄",
+        "empty": "暫無預測紀錄",
+        "close_btn": "✕"
+    },
+    "tips": {
+        "submit_deadline": "請在{deadline}（GMT+3）前提交預測的收盤價。",
+        "integer_desc": "輸入產品收盤價的整數部分（例：若產品實際價格為 396.72，則預測 396 將被視為正確預測，而預測 397 則被視為錯誤預測）。​",
+        "closing_time_weekday": "*當日收盤價以 MT5 VantageMarkets-Live 系統時間 23:59 為準。",
+        "closing_time_friday": "*當日收盤價以 MT5 VantageMarkets-Live 系統時間 23:55 為準。"
+    },
+    "stocks": {
+        "submit": "(按鈕) 提交",
+        "revise": "(按鈕) 更改"
+    },
+    "footer": {
+        "risk_warning": "風險提示： 差價合約（CFD）屬於複雜的金融工具，由於槓桿作用，存在快速虧損資金的高風險。交易前請確保您已充分了解相關風險。"
+    },
+    "messages": {
+        "logout_success": "退出成功！",
+        "enter_email": "請輸入 Email",
+        "enter_uid": "請輸入 UID",
+        "login_success": "登入成功！",
+        "enter_price": "請輸入價格",
+        "submit_success": "提交成功！",
+        "banner_title": "美股差價合約價格預測",
+        "banner_desc_1": "參與預測股票收盤價，",
+        "banner_desc_2": "贏取兩張美元免費訂單券。"
+    },
+    "errors": {
+        "invalid_credentials": "無效的電子郵件或 UID，請檢查您的資訊。",
+        "guessing_closed": "今日預測已關閉（截止時間：{deadline} GMT+3）。"
+    }
 }

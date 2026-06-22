@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Stock;
 use Illuminate\Database\Seeder;
 
 class StockSeeder extends Seeder
@@ -22,7 +22,7 @@ class StockSeeder extends Seeder
         ];
 
         foreach ($stocks as $stock) {
-            \App\Models\Stock::updateOrCreate(['symbol' => $stock['symbol']], $stock);
+            Stock::updateOrCreate(['symbol' => $stock['symbol']], $stock);
         }
     }
 }

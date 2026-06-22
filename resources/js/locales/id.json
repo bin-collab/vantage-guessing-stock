@@ -1,0 +1,54 @@
+{
+    "language": "Indonesia",
+    "nav": {
+        "login_logout": "Masuk/Keluar"
+    },
+    "login": {
+        "uid_placeholder": "Masukkan UID Anda",
+        "email_placeholder": "Masukkan email Anda yang terdaftar",
+        "login_btn": "Masuk",
+        "logout_btn": "Keluar"
+    },
+    "notice": {
+        "eligibility": "Hanya klien yang melakukan opt-in antara 22-28 Juni 2026 yang berhak mengirimkan tebakan."
+    },
+    "timer": {
+        "remaining": "Waktu tersisa",
+        "hour": "Jam.",
+        "minute": "Menit.",
+        "second": "Detik."
+    },
+    "history": {
+        "title": "Riwayat Tebakan Saya",
+        "empty": "Tidak ada riwayat tebakan",
+        "close_btn": "✕"
+    },
+    "tips": {
+        "submit_deadline": "Silakan kirimkan tebakan harga penutupan Anda sebelum pukul {deadline} (GMT+3).",
+        "integer_desc": "Masukkan bagian bilangan bulat dari harga penutupan yang Anda prediksi (misalnya, masukkan 396 untuk harga 396,72).",
+        "closing_time_weekday": "Harga penutupan hari ini akan dicatat pada pukul 23:59 oleh sistem MT5 VantageMarkets-Live.",
+        "closing_time_friday": "Harga penutupan hari ini akan dicatat pada pukul 23:55 oleh sistem MT5 VantageMarkets-Live."
+    },
+    "stocks": {
+        "submit": "Submit",
+        "revise": "Revisi"
+    },
+    "footer": {
+        "risk_warning": "Peringatan Risiko: CFD adalah instrumen yang kompleks dan memiliki risiko tinggi kehilangan uang dengan cepat karena leverage. Pastikan Anda sepenuhnya memahami risiko yang terlibat sebelum bertransaksi."
+    },
+    "messages": {
+        "logout_success": "Berhasil keluar!",
+        "enter_email": "Silakan masukkan email",
+        "enter_uid": "Silakan masukkan UID",
+        "login_success": "Berhasil masuk!",
+        "enter_price": "Silakan masukkan harga",
+        "submit_success": "Berhasil mengirim!",
+        "banner_title": "Tebak Harga CFD Saham AS",
+        "banner_desc_1": "Ikuti tebakan harga penutupan saham,",
+        "banner_desc_2": "dapatkan dua voucher pesanan gratis USD."
+    },
+    "errors": {
+        "invalid_credentials": "Email atau UID tidak valid. Silakan periksa informasi Anda.",
+        "guessing_closed": "Tebakan ditutup untuk hari ini (Batas waktu: {deadline} GMT+3)."
+    }
+}

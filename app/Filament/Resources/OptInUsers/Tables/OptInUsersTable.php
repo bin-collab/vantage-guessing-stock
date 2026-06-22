@@ -2,9 +2,12 @@
 
 namespace App\Filament\Resources\OptInUsers\Tables;
 
+use App\Filament\Imports\OptInUserImporter;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ImportAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class OptInUsersTable
@@ -14,15 +17,15 @@ class OptInUsersTable
         return $table
             ->poll('5s')
             ->columns([
-                \Filament\Tables\Columns\TextColumn::make('email')
+                TextColumn::make('email')
                     ->searchable(),
-                \Filament\Tables\Columns\TextColumn::make('uid')
+                TextColumn::make('uid')
                     ->label('UID')
                     ->searchable(),
-                \Filament\Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('用户名')
                     ->searchable(),
-                \Filament\Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -31,8 +34,8 @@ class OptInUsersTable
                 //
             ])
             ->headerActions([
-                \Filament\Actions\ImportAction::make()
-                    ->importer(\App\Filament\Imports\OptInUserImporter::class),
+                ImportAction::make()
+                    ->importer(OptInUserImporter::class),
             ])
             ->recordActions([
                 EditAction::make(),

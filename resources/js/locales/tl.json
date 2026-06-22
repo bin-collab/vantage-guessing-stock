@@ -1,0 +1,54 @@
+{
+    "language": "Tagalog",
+    "nav": {
+        "login_logout": "Mag-log In / Mag-log Out"
+    },
+    "login": {
+        "uid_placeholder": "Ilagay ang iyong UID.",
+        "email_placeholder": "Ilagay ang iyong rehistradong email address.",
+        "login_btn": "Mag-log In",
+        "logout_btn": "Mag-log Out"
+    },
+    "notice": {
+        "eligibility": "Tanging ang mga kliyente na nag-opt in sa pagitan ng Hunyo 22–28, 2026 ang maaaring magsumite ng mga hula."
+    },
+    "timer": {
+        "remaining": "Natitirang Oras",
+        "hour": "Hr.",
+        "minute": "Min.",
+        "second": "Seg."
+    },
+    "history": {
+        "title": "Ang Aking Guess Records",
+        "empty": "Walang mga rekord ng hula",
+        "close_btn": "✕"
+    },
+    "tips": {
+        "submit_deadline": "Pakisumite ang iyong mga hula sa presyo ng pagsasara bago mag-{deadline} (GMT+3).",
+        "integer_desc": "Ilagay ang bahagi ng integer ng iyong hinulaang presyo ng pagsasara (hal., ilagay ang 396 para sa presyong 396.72).",
+        "closing_time_weekday": "Ang mga presyo ng pagsasara ngayon ay itatala sa ganap na 23:59 ng sistemang MT5 VantageMarkets-Live.",
+        "closing_time_friday": "Ang mga presyo ng pagsasara ngayon ay itatala sa ganap na 23:55 ng sistemang MT5 VantageMarkets-Live."
+    },
+    "stocks": {
+        "submit": "Submit",
+        "revise": "Revise"
+    },
+    "footer": {
+        "risk_warning": "Babala sa Panganib: Ang mga CFD ay mga kumplikadong instrumento at may mataas na panganib na mabilis na mawalan ng pera dahil sa leverage. Pakitiyak na lubos mong nauunawaan ang mga panganib bago makipagkalakalan."
+    },
+    "messages": {
+        "logout_success": "Matagumpay na naka-log out!",
+        "enter_email": "Mangyaring ilagay ang email",
+        "enter_uid": "Mangyaring ilagay ang UID",
+        "login_success": "Matagumpay na naka-log in!",
+        "enter_price": "Mangyaring ilagay ang presyo",
+        "submit_success": "Matagumpay na naisumite!",
+        "banner_title": "Hula sa Presyo ng CFD ng US Stock",
+        "banner_desc_1": "Sumali sa paghula ng presyo ng pagsasara ng stock,",
+        "banner_desc_2": "manalo ng dalawang libreng voucher ng order ng USD."
+    },
+    "errors": {
+        "invalid_credentials": "Di-wastong email o UID. Pakisuri ang iyong impormasyon.",
+        "guessing_closed": "Sarado na ang paghula para sa araw na ito (Deadline: {deadline} GMT+3)."
+    }
+}

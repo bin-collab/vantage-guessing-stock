@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\ClosingPrices\Schemas;
 
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class ClosingPriceForm
@@ -10,12 +13,12 @@ class ClosingPriceForm
     {
         return $schema
             ->components([
-                \Filament\Forms\Components\Select::make('stock_id')
+                Select::make('stock_id')
                     ->relationship('stock', 'symbol')
                     ->required(),
-                \Filament\Forms\Components\DatePicker::make('date')
+                DatePicker::make('date')
                     ->required(),
-                \Filament\Forms\Components\TextInput::make('price')
+                TextInput::make('price')
                     ->numeric()
                     ->required(),
             ]);

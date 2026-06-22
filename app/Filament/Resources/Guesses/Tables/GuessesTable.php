@@ -69,7 +69,7 @@ class GuessesTable
                             ->label('选择日期'),
                     ])
                     ->query(function ($query, array $data) {
-                        return $query->when($data['date'], fn($q) => $q->whereDate('guess_date', $data['date']));
+                        return $query->when($data['date'], fn ($q) => $q->whereDate('guess_date', $data['date']));
                     })
                     ->label('竞猜日期'),
             ])
@@ -98,7 +98,7 @@ class GuessesTable
 
                         return response()->streamDownload(function () use ($csv) {
                             echo $csv->toString();
-                        }, 'guesses_' . now()->format('Y-m-d') . '.csv');
+                        }, 'guesses_'.now()->format('Y-m-d').'.csv');
                     }),
             ])
             ->recordActions([

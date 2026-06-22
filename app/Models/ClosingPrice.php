@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\GuessService;
 use Illuminate\Database\Eloquent\Model;
 
 class ClosingPrice extends Model
@@ -28,7 +29,7 @@ class ClosingPrice extends Model
     protected static function booted(): void
     {
         static::saved(function (ClosingPrice $closingPrice) {
-            app(\App\Services\GuessService::class)->validateGuesses($closingPrice);
+            app(GuessService::class)->validateGuesses($closingPrice);
         });
     }
 }

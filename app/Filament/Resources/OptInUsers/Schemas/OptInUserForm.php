@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\OptInUsers\Schemas;
 
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class OptInUserForm
@@ -10,15 +11,15 @@ class OptInUserForm
     {
         return $schema
             ->components([
-                \Filament\Forms\Components\TextInput::make('email')
+                TextInput::make('email')
                     ->email()
                     ->required()
                     ->unique(ignoreRecord: true),
-                \Filament\Forms\Components\TextInput::make('uid')
+                TextInput::make('uid')
                     ->label('UID')
                     ->required()
                     ->unique(ignoreRecord: true),
-                \Filament\Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->label('用户名'),
             ]);
     }
