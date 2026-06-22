@@ -44,8 +44,9 @@
         "enter_price": "Silakan masukkan harga",
         "submit_success": "Berhasil mengirim!",
         "banner_title": "Tebak Harga CFD Saham AS",
-        "banner_desc_1": "Ikuti tebakan harga penutupan saham,",
-        "banner_desc_2": "dapatkan dua voucher pesanan gratis USD."
+        "banner_desc_1": "Tebak harga penutupan saham dan",
+        "banner_desc_2": "ikut berpartisipasi untuk mendapatkan dua Voucher Order Gratis senilai $25.",
+        "banner_desc_3": "*Syarat dan ketentuan berlaku."
     },
     "errors": {
         "invalid_credentials": "Email atau UID tidak valid. Silakan periksa informasi Anda.",

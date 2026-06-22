@@ -43,9 +43,10 @@
         "login_success": "로그인 성공!",
         "enter_price": "가격을 입력하세요",
         "submit_success": "제출 성공!",
-        "banner_title": "미국 주식 CFD 가격 예측",
-        "banner_desc_1": "주식 종가 예측에 참여하여,",
-        "banner_desc_2": "2달러 무료 주문 쿠폰을 받으세요."
+        "banner_title": "미국 주식 CFD 종가 예측",
+        "banner_desc_1": "주식 종가를 예측하고,",
+        "banner_desc_2": "$25 상당의 프리 오더 바우처 2를 받을 기회에 참여하세요.",
+        "banner_desc_3": "*이용약관 및 조건 적용"
     },
     "errors": {
         "invalid_credentials": "잘못된 이메일 또는 UID입니다. 정보를 확인해 주세요.",

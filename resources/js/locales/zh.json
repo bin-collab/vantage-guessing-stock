@@ -45,7 +45,8 @@
         "submit_success": "提交成功！",
         "banner_title": "美股差價合約價格預測",
         "banner_desc_1": "參與預測股票收盤價，",
-        "banner_desc_2": "贏取兩張美元免費訂單券。"
+        "banner_desc_2": "贏取兩張 25 美元免費訂單券。",
+        "banner_desc_3": "*條款與細則適用"
     },
     "errors": {
         "invalid_credentials": "無效的電子郵件或 UID，請檢查您的資訊。",

@@ -45,7 +45,8 @@
         "submit_success": "提交成功！",
         "banner_title": "美股差价合约价格预测",
         "banner_desc_1": "参与预测股票收盘价，",
-        "banner_desc_2": "赢取两张美元免费订单券。"
+        "banner_desc_2": "赢取两张 25 美元免费订单券。",
+        "banner_desc_3": "*条款与细则适用"
     },
     "errors": {
         "invalid_credentials": "无效的电子邮件或 UID，请检查您的信息。",

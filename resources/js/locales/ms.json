@@ -43,9 +43,10 @@
         "login_success": "Log masuk berjaya!",
         "enter_price": "Sila masukkan harga",
         "submit_success": "Hantar berjaya!",
-        "banner_title": "Ramalan Harga CFD Saham AS",
-        "banner_desc_1": "Sertai ramalan harga penutupan saham,",
-        "banner_desc_2": "menang dua kupon pesanan percuma USD."
+        "banner_title": "Teka Harga CFD Saham AS",
+        "banner_desc_1": "Teka harga penutupan saham dan",
+        "banner_desc_2": "sertai untuk menerima dua Baucar Free Order bernilai $25.",
+        "banner_desc_3": "*Tertakluk kepada terma dan syarat."
     },
     "errors": {
         "invalid_credentials": "Emel atau UID tidak sah. Sila semak maklumat anda.",

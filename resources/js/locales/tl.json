@@ -43,9 +43,10 @@
         "login_success": "Matagumpay na naka-log in!",
         "enter_price": "Mangyaring ilagay ang presyo",
         "submit_success": "Matagumpay na naisumite!",
-        "banner_title": "Hula sa Presyo ng CFD ng US Stock",
-        "banner_desc_1": "Sumali sa paghula ng presyo ng pagsasara ng stock,",
-        "banner_desc_2": "manalo ng dalawang libreng voucher ng order ng USD."
+        "banner_title": "US Stock CFD Price Guess",
+        "banner_desc_1": "Bawat tamang hula ay mananalo ng dalawang $25 na Libreng Order Voucher.",
+        "banner_desc_2": "",
+        "banner_desc_3": "*May mga Tuntunin at Kundisyon na nalalapat."
     },
     "errors": {
         "invalid_credentials": "Di-wastong email o UID. Pakisuri ang iyong impormasyon.",

@@ -44,8 +44,9 @@
         "enter_price": "Please enter price",
         "submit_success": "Submitted successfully!",
         "banner_title": "US Stock CFD Price Guess",
-        "banner_desc_1": "Predict stock closing prices,",
-        "banner_desc_2": "and win two USD free order vouchers."
+        "banner_desc_1": "Guess the stock closing price",
+        "banner_desc_2": "and participate to earn two $25 Free Order Vouchers.",
+        "banner_desc_3": "*Terms and conditions apply."
     },
     "errors": {
         "invalid_credentials": "Invalid email or UID. Please check your information.",

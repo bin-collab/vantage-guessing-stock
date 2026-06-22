@@ -81,6 +81,9 @@ onMounted(() => {
     const savedLocale = localStorage.getItem('locale');
     if (savedLocale) {
         locale.value = savedLocale;
+    }else{
+        locale.value = 'en';
+        localStorage.setItem('locale', 'en');
     }
 });
 </script>
@@ -124,7 +127,9 @@ onMounted(() => {
                 <div class="banner-spec-text">
                     <p>{{ t('messages.banner_desc_1') }}</p>
                     <p>{{ t('messages.banner_desc_2') }}</p>
+
                 </div>
+                <div class="banner-terms">{{ t('messages.banner_desc_3') }}</div>
             </div>
         </div>
     </section>
@@ -225,6 +230,12 @@ onMounted(() => {
 
 .banner-spec-text {
     font-size: clamp(16px, 1.8vw, 58px);
+}
+
+.banner-terms{
+    margin-top:50px;
+    font-size: clamp(12px, 1.2vw, 24px);
+    color: #ffffff;
 }
 
 .banner-spec-text p {
@@ -424,6 +435,9 @@ onMounted(() => {
     }
     #coming-soon-container{
         padding-top: 40px;
+    }
+    .banner-terms{
+        margin-top:20px;
     }
 }
 </style>
