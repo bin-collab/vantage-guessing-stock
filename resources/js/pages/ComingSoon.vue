@@ -124,10 +124,9 @@ onMounted(() => {
         <div class="banner-box">
             <div class="banner-content">
                 <div class="banner-text">{{ t('messages.banner_title') }}</div>
-                <div class="banner-spec-text">
+                <div class="banner-spec-text" :class="locale">
                     <p>{{ t('messages.banner_desc_1') }}</p>
                     <p>{{ t('messages.banner_desc_2') }}</p>
-
                 </div>
                 <div class="banner-terms">{{ t('messages.banner_desc_3') }}</div>
             </div>
@@ -230,6 +229,26 @@ onMounted(() => {
 
 .banner-spec-text {
     font-size: clamp(16px, 1.8vw, 58px);
+}
+
+
+.banner-spec-text.en p,
+.banner-spec-text.ms p,
+.banner-spec-text.id p,
+.banner-spec-text.tl p,
+.banner-spec-text.vi p {
+    font-size: clamp(14px, 1.5vw, 48px);
+}
+.banner-spec-text.ru p {
+    font-size: clamp(13px, 1.4vw, 42px);
+}
+.banner-spec-text.kk p,
+.banner-spec-text.uz p,
+.banner-spec-text.mn p {
+    font-size: clamp(14px, 1.5vw, 46px);
+}
+.banner-spec-text.ko p {
+    font-size: clamp(15px, 1.6vw, 52px);
 }
 
 .banner-terms{

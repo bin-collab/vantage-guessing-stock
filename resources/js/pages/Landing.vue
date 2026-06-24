@@ -341,10 +341,11 @@ onUnmounted(() => {
         <div class="banner-box">
             <div class="banner-content">
                 <div class="banner-text">{{ t('messages.banner_title') }}</div>
-                <div class="banner-spec-text">
+                <div class="banner-spec-text" :class="locale">
                     <p>{{ t('messages.banner_desc_1') }}</p>
                     <p>{{ t('messages.banner_desc_2') }}</p>
                 </div>
+                <div class="banner-terms">*{{ t('messages.banner_desc_3') }}</div>
             </div>
         </div>
     </section>
@@ -465,8 +466,8 @@ onUnmounted(() => {
         <div class="login-box">
             <div class="login-left">
                 <div class="login-title-box">
-                    <div class="login-title">{{ t('messages.banner_title') }}</div>
-                    <div class="login-subtitle">
+                    <div class="login-title" :class="locale">{{ t('messages.banner_title') }}</div>
+                    <div class="login-subtitle" :class="locale">
                         <p>{{ t('messages.banner_desc_1') }}</p>
                         <p>{{ t('messages.banner_desc_2') }}</p>
                     </div>
@@ -836,26 +837,47 @@ input[type=number] {
 }
 .banner-box{
     text-align: left;
-    width: 1200px;
+    width: 1400px;
 }
 .banner-content{
-    max-width: 600px;
+    max-width: 700px;
 }
 .banner-text{
-    margin-bottom: 15px;
-    font-size: clamp(24px, 3.5vw, 36px);
+    margin-bottom: 20px;
+    font-size: clamp(18px, 1.8vw, 36px);
     font-weight: bold;
+    line-height: 1.3;
 }
 .banner-spec-text {
-    font-size: clamp(16px, 1.8vw, 58px);
+    font-size: clamp(16px, 1.8vw, 36px);
+}
+.banner-spec-text.en p,
+.banner-spec-text.ms p,
+.banner-spec-text.id p,
+.banner-spec-text.tl p,
+.banner-spec-text.vi p {
+    font-size: clamp(14px, 1.5vw, 36px);
+}
+.banner-spec-text.ru p {
+    font-size: clamp(13px, 1.4vw, 36px);
+}
+.banner-spec-text.kk p,
+.banner-spec-text.uz p,
+.banner-spec-text.mn p {
+    font-size: clamp(14px, 1.3vw, 36px);
+}
+.banner-spec-text.ko p {
+    font-size: clamp(15px, 1.6vw, 36px);
 }
 .banner-spec-text p{
-    background: linear-gradient(180deg, #FFFFFF 30.29%, #ED650D 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    font-weight: bold;
-    -webkit-text-fill-color: transparent;
-    line-height: 1.3;
+    color: #c1fff3;
+    line-height: 1.4;
+}
+
+.banner-terms{
+    color: #fdfdfd;
+    margin-top: 15px;
+    font-size: clamp(12px, 1.2vw, 18px);
 }
 
 #container{
@@ -1167,11 +1189,11 @@ input[type=number] {
 
 }
 .login-title{
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 10px;
 }
 .login-subtitle p{
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     background: linear-gradient(180deg, #FFFFFF 30.29%, #ED650D 100%);
     background-clip: text;
@@ -1180,11 +1202,32 @@ input[type=number] {
     -webkit-text-fill-color: transparent;
     line-height: normal;
 }
+.login-subtitle.en p,
+.login-subtitle.ms p,
+.login-subtitle.id p,
+.login-subtitle.tl p,
+.login-subtitle.vi p {
+    font-size: 18px;
+}
+.login-subtitle.ru p {
+    font-size: 18px;
+}
+.login-subtitle.kk p,
+.login-subtitle.uz p,
+.login-subtitle.mn p {
+    font-size: 18px;
+}
+.login-subtitle.ko p {
+    font-size: 18px;
+}
 
 .history-result{
     font-size: 15px;
 }
-@media (max-width: 1400px) {
+@media (max-width: 1450px) {
+    .banner-box{
+        width: 90%;
+    }
     #footer{
         width: 95%;
     }
@@ -1213,6 +1256,9 @@ input[type=number] {
 
     .time-title{
         font-size: 18px;
+    }
+    .banner-content {
+        max-width: 500px;
     }
 
 }
