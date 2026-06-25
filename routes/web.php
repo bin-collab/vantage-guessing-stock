@@ -38,9 +38,9 @@ Route::get('/', function (GuessService $guessService) {
     ]);
 })->name('landing');
 
-// Route::get('/', function () {
-//     return Inertia::render('ComingSoon');
-// })->name('landing');
+Route::get('/coming-soon', function () {
+    return Inertia::render('ComingSoon');
+})->name('coming-soon');
 
 Route::post('/login', 'App\Http\Controllers\AuthController@login');
 Route::post('/logout', 'App\Http\Controllers\AuthController@logout')->name('logout');

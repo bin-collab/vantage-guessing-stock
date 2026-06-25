@@ -44,9 +44,9 @@
         "enter_price": "Vui lòng nhập giá",
         "submit_success": "Gửi thành công!",
         "banner_title": "Dự đoán biến động giá CFD cổ phiếu Mỹ",
-        "banner_desc_1": "Dự đoán giá đóng cửa cổ phiếu và tham",
-        "banner_desc_2": "gia để nhận ngay 2 voucher miễn phí đặt lệnh trị giá 25$",
-        "banner_desc_3": "*Áp dụng điều khoản và điều kiện"
+        "banner_desc": "Dự đoán giá đóng cửa cổ phiếu và tham<br>gia để nhận ngay 2 voucher miễn phí đặt<br>lệnh trị giá 25$. ",
+        "banner_desc_2": "Đăng ký tham gia ngay hôm nay",
+        "banner_desc_3": "*Áp dụng T&Cs."
     },
     "errors": {
         "invalid_credentials": "Email hoặc UID không hợp lệ. Vui lòng kiểm tra lại thông tin.",

@@ -44,9 +44,9 @@
         "enter_price": "Mangyaring ilagay ang presyo",
         "submit_success": "Matagumpay na naisumite!",
         "banner_title": "US Stock CFD Price Guess",
-        "banner_desc_1": "Bawat tamang hula ay mananalo ng dalawang $25 na Libreng Order Voucher.",
-        "banner_desc_2": "",
-        "banner_desc_3": "*May mga Tuntunin at Kundisyon na nalalapat."
+        "banner_desc": "Hulaan ang presyo ng pagsasara ng<br>stock at sumali para makakuha ng<br>dalawang $25 na Libreng Order Voucher. ",
+        "banner_desc_2": "MAG OPT-IN NA",
+        "banner_desc_3": "*May mga T&C na nalalapat."
     },
     "errors": {
         "invalid_credentials": "Di-wastong email o UID. Pakisuri ang iyong impormasyon.",

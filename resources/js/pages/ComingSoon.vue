@@ -125,10 +125,10 @@ onMounted(() => {
             <div class="banner-content">
                 <div class="banner-text">{{ t('messages.banner_title') }}</div>
                 <div class="banner-spec-text" :class="locale">
-                    <p>{{ t('messages.banner_desc_1') }}</p>
-                    <p>{{ t('messages.banner_desc_2') }}</p>
+                    <p v-html="t('messages.banner_desc')"></p>
                 </div>
-                <div class="banner-terms">{{ t('messages.banner_desc_3') }}</div>
+                <div class="banner-spec-text1" :class="locale"><a href="#">{{ t('messages.banner_desc_2') }}</a></div>
+                <div class="banner-terms" v-html="t('messages.banner_desc_3')"></div>
             </div>
         </div>
     </section>
@@ -149,123 +149,11 @@ onMounted(() => {
     </section>
 </template>
 
-<style>
-.language-btn:focus-visible{
-    outline: none !important;
-}
-</style>
+<style src="./Landing.css"></style>
+
+<style scoped src="./Landing-scoped.css"></style>
 
 <style scoped>
-#header {
-    text-align: center;
-    position: fixed;
-    width: 100%;
-    background-color: #fff;
-    top: 0;
-    z-index: 1111;
-    box-shadow: 0px 3px 13px 0px #0000006e;
-}
-
-.header-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header-box {
-    width: 90%;
-    padding: 18px 0;
-    display: inline-block;
-}
-
-.logo img {
-    height: 40px;
-}
-
-.menu {
-    display: flex;
-    gap: 20px;
-}
-
-.language-btn {
-    box-shadow: 0px 1px 7px 1px #ccc;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 16px;
-    line-height: unset;
-    color: #000;
-}
-
-#banner {
-    background-image: url('/images/banner.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 655px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-    font-size: 46px;
-    margin-top: 70px;
-}
-
-.banner-box {
-    text-align: left;
-    width: 1200px;
-}
-
-.banner-content {
-    max-width: 600px;
-}
-
-.banner-text {
-    margin-bottom: 15px;
-    font-size: clamp(24px, 3.5vw, 36px);
-    font-weight: bold;
-}
-
-.banner-spec-text {
-    font-size: clamp(16px, 1.8vw, 58px);
-}
-
-
-.banner-spec-text.en p,
-.banner-spec-text.ms p,
-.banner-spec-text.id p,
-.banner-spec-text.tl p,
-.banner-spec-text.vi p {
-    font-size: clamp(14px, 1.5vw, 48px);
-}
-.banner-spec-text.ru p {
-    font-size: clamp(13px, 1.4vw, 42px);
-}
-.banner-spec-text.kk p,
-.banner-spec-text.uz p,
-.banner-spec-text.mn p {
-    font-size: clamp(14px, 1.5vw, 46px);
-}
-.banner-spec-text.ko p {
-    font-size: clamp(15px, 1.6vw, 52px);
-}
-
-.banner-terms{
-    margin-top:50px;
-    font-size: clamp(12px, 1.2vw, 24px);
-    color: #ffffff;
-}
-
-.banner-spec-text p {
-    background: linear-gradient(180deg, #FFFFFF 30.29%, #ED650D 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    font-weight: bold;
-    -webkit-text-fill-color: transparent;
-    line-height: 1.3;
-}
-
 #coming-soon-container {
     padding: 80px 0 0 0;
     background: linear-gradient(180deg, rgba(26, 26, 26, 0) 0%, #002127 2.41%, #252525 100%);
@@ -374,76 +262,7 @@ onMounted(() => {
     }
 }
 
-#footer {
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-    border-top: 1px solid #00DDCE6E;
-    width: 1400px;
-    margin: 0 auto;
-    font-size: 14px;
-    opacity: 0.7;
-}
-
-@media (max-width: 1400px) {
-    #footer {
-        width: 95%;
-    }
-}
-
-@media (max-width: 1280px) {
-    .banner-box {
-        width: 85%;
-    }
-
-    #banner {
-        font-size: 32px;
-        height: 450px;
-    }
-}
-
-@media (max-width: 1000px) {
-    .banner-box {
-        width: 90%;
-    }
-}
-
 @media (max-width: 650px) {
-    #banner {
-        height: 250px;
-        font-size: 18px;
-    }
-
-    .banner-content {
-        max-width: 100%;
-    }
-
-    .banner-text {
-        font-size: 20px;
-        margin-bottom: 8px;
-    }
-
-    .banner-spec-text {
-        font-size: 13px;
-    }
-
-    .banner-spec-text p {
-        line-height: unset;
-    }
-
-    .logo img {
-        height: 30px;
-    }
-
-    .header-box {
-        width: 95%;
-    }
-
-    .language-btn {
-        font-size: 15px;
-        padding: 5px 10px;
-    }
-
     .coming-soon-card {
         padding: 40px 20px;
     }
@@ -454,9 +273,6 @@ onMounted(() => {
     }
     #coming-soon-container{
         padding-top: 40px;
-    }
-    .banner-terms{
-        margin-top:20px;
     }
 }
 </style>

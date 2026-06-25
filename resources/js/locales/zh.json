@@ -30,8 +30,8 @@
         "closing_time_friday": "*當日收盤價以 MT5 VantageMarkets-Live 系統時間 23:55 為準。"
     },
     "stocks": {
-        "submit": "(按鈕) 提交",
-        "revise": "(按鈕) 更改"
+        "submit": "提交",
+        "revise": "更改"
     },
     "footer": {
         "risk_warning": "風險提示： 差價合約（CFD）屬於複雜的金融工具，由於槓桿作用，存在快速虧損資金的高風險。交易前請確保您已充分了解相關風險。"
@@ -44,9 +44,9 @@
         "enter_price": "請輸入價格",
         "submit_success": "提交成功！",
         "banner_title": "美股差價合約價格預測",
-        "banner_desc_1": "參與預測股票收盤價，",
-        "banner_desc_2": "贏取兩張 25 美元免費訂單券。",
-        "banner_desc_3": "*條款與細則適用"
+        "banner_desc": "參與預測股票收盤價，<br>贏取兩張 25 美元免費訂單券。",
+        "banner_desc_2": "立即參與活動",
+        "banner_desc_3": "*條款與細則適用。"
     },
     "errors": {
         "invalid_credentials": "無效的電子郵件或 UID，請檢查您的資訊。",

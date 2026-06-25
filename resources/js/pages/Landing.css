@@ -1,0 +1,237 @@
+.el-dropdown-menu__item:not(.is-disabled):hover, .el-dropdown-menu__item:not(.is-disabled):focus {
+    color: #000000;
+}
+.login-dialog {
+    border-radius: 20px !important;
+    overflow: hidden;
+    padding: 0 !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+.login-dialog .el-dialog__header {
+    display: none;
+}
+.login-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0px 1px 7px 1px #ccc;
+    /* background: rgba(0, 0, 0, 0.12); */
+    color: #555;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 10;
+}
+.login-close-btn:hover {
+    background: rgba(0, 0, 0, 0.22);
+    color: #111;
+}
+.login-dialog .el-dialog__body {
+    padding: 0 !important;
+}
+
+.history-dialog {
+    border-radius: 20px !important;
+    overflow: hidden;
+    padding: 0 !important;
+    background: linear-gradient(180deg, #06242a 0%, #0d1114 100%) !important;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45) !important;
+}
+
+.history-dialog .el-dialog__header {
+    display: none;
+}
+
+.history-dialog .el-dialog__body {
+    padding: 0 !important;
+}
+
+.history-box {
+    position: relative;
+    padding: 30px;
+    color: #fff;
+}
+
+.history-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0px 1px 7px 1px rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 10;
+    border:1px solid #fff;
+}
+
+.history-close-btn:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.history-header {
+    padding-right: 48px;
+    margin-bottom: 24px;
+}
+
+.history-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.history-subtitle {
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.history-group {
+    border: 1px solid rgba(0, 194, 184, 0.25);
+    border-radius: 18px;
+    background: rgba(0, 194, 184, 0.06);
+    padding: 18px;
+}
+
+.history-group-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: #00ddce;
+}
+
+.history-items {
+    display: grid;
+    gap: 12px;
+
+}
+
+.history-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 14px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.history-item-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.history-stock {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.history-stock-symbol {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.history-stock-name {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.history-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #FF9800;
+}
+
+.history-item-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.history-label {
+    font-size: 15px;
+}
+
+.history-empty {
+    padding: 16px 0 8px;
+}
+
+.guess-history-btn {
+    margin-top:10px;
+    border: 1px solid #00c2b8;
+    color: #fff;
+    box-shadow: 0px 1px 7px 1px rgba(0, 194, 184, 0.15);
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: linear-gradient(180deg, rgba(25, 108, 121, 0.7) 0%, #000000 100%);
+
+}
+
+.guess-history-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0px 10px 24px rgba(0, 194, 184, 0.18);
+}
+
+.language-btn:focus-visible{
+    outline: none !important;
+}
+
+@media (max-width: 1000px) {
+    .el-dialog.login-dialog {
+        width: 95% !important;
+        border-radius: 12px !important;
+    }
+
+    .el-dialog.history-dialog {
+        width: 95% !important;
+        border-radius: 12px !important;
+    }
+
+    .history-box {
+        padding: 20px;
+    }
+
+    .history-title {
+        font-size: 22px;
+    }
+
+    .history-item-main {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

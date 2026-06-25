@@ -44,9 +44,9 @@
         "enter_price": "Iltimos, narxni kiriting",
         "submit_success": "Muvaffaqiyatli yuborildi!",
         "banner_title": "AQSh aksiyalari CFD narxini taxmin qiling",
-        "banner_desc_1": "Aksiya yopilish narxini taxmin qiling va ishtirok etib,",
-        "banner_desc_2": "ikkita $25 Free Order vaucherini qo‘lga kiriting.",
-        "banner_desc_3": "*Shartlar va qoidalar amal qiladi."
+        "banner_desc": "Aksiya yopilish narxini taxmin qiling va<br>ishtirok etib, ikkita $25 Free Order<br>vaucherini qo‘lga kiriting. ",
+        "banner_desc_2": "HOZIROQ QO'SHILING",
+        "banner_desc_3": "*Shartlar va qoidalar<br>amal qiladi."
     },
     "errors": {
         "invalid_credentials": "Elektron pochta yoki UID noto‘g‘ri. Iltimos, ma’lumotlaringizni tekshiring.",

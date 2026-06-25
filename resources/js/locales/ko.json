@@ -44,8 +44,8 @@
         "enter_price": "가격을 입력하세요",
         "submit_success": "제출 성공!",
         "banner_title": "미국 주식 CFD 종가 예측",
-        "banner_desc_1": "주식 종가를 예측하고,",
-        "banner_desc_2": "$25 상당의 프리 오더 바우처 2를 받을 기회에 참여하세요.",
+        "banner_desc": "주식 종가 예측 이벤트에 참여하고 $25 프리오더<br>바우처 2장을 받으세요. ",
+        "banner_desc_2": "지금 참여하기",
         "banner_desc_3": "*이용약관 및 조건 적용"
     },
     "errors": {
