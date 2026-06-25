@@ -116,6 +116,22 @@ input[type=number] {
     font-size: clamp(18px, 2.5vw, 36px);
 }
 
+.banner-text.en,
+.banner-text.ms,
+.banner-text.id,
+.banner-text.tl,
+.banner-text.ru,
+.banner-text.mn {
+    font-size: clamp(16px, 2.8vw, 36px);
+}
+
+.banner-text.uz,
+.banner-text.kk,
+.banner-text.vi,
+.banner-text.ko {
+    font-size: clamp(16px, 2.4vw, 28px);
+}
+
 .banner-spec-text.en p,
 .banner-spec-text.ms p,
 .banner-spec-text.id p,
@@ -135,7 +151,7 @@ input[type=number] {
 }
 
 .banner-spec-text.ko p {
-    font-size: clamp(16px, 1.6vw, 36px);
+    font-size: clamp(16px, 1.4vw, 34px);
 }
 
 .banner-spec-text p {

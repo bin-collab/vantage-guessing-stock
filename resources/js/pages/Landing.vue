@@ -339,7 +339,7 @@ onUnmounted(() => {
     <section id="banner">
         <div class="banner-box">
             <div class="banner-content">
-                <div class="banner-text">{{ t('messages.banner_title') }}</div>
+                <div class="banner-text" :class="locale">{{ t('messages.banner_title') }}</div>
                 <div class="banner-spec-text" :class="locale">
                     <p v-html="t('messages.banner_desc')"></p>
                 </div>
