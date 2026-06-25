@@ -118,17 +118,17 @@ input[type=number] {
 
 .banner-text.en,
 .banner-text.ms,
-.banner-text.id,
-.banner-text.tl,
-.banner-text.ru,
-.banner-text.mn {
+.banner-text.tl {
     font-size: clamp(16px, 2.8vw, 36px);
 }
 
 .banner-text.uz,
 .banner-text.kk,
 .banner-text.vi,
-.banner-text.ko {
+.banner-text.ko,
+.banner-text.ru,
+.banner-text.mn,
+.banner-text.id {
     font-size: clamp(16px, 2.4vw, 28px);
 }
 
