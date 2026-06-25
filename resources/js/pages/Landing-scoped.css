@@ -107,13 +107,13 @@ input[type=number] {
 
 .banner-text {
     margin-bottom: 20px;
-    font-size: clamp(16px, 1.8vw, 36px);
-    font-weight: bold;
+    font-size: clamp(18px, 2.8vw, 36px);
     line-height: 1.3;
 }
 
 .banner-spec-text {
-    font-size: clamp(16px, 1.8vw, 36px);
+    font-weight: bold;
+    font-size: clamp(18px, 2.5vw, 36px);
 }
 
 .banner-spec-text.en p,
@@ -121,25 +121,25 @@ input[type=number] {
 .banner-spec-text.id p,
 .banner-spec-text.tl p,
 .banner-spec-text.vi p {
-    font-size: clamp(14px, 1.5vw, 36px);
+    font-size: clamp(16px, 1.5vw, 36px);
 }
 
 .banner-spec-text.ru p {
-    font-size: clamp(13px, 1.4vw, 36px);
+    font-size: clamp(16px, 1.4vw, 36px);
 }
 
 .banner-spec-text.kk p,
 .banner-spec-text.uz p,
 .banner-spec-text.mn p {
-    font-size: clamp(14px, 1.3vw, 36px);
+    font-size: clamp(16px, 1.3vw, 36px);
 }
 
 .banner-spec-text.ko p {
-    font-size: clamp(15px, 1.6vw, 36px);
+    font-size: clamp(16px, 1.6vw, 36px);
 }
 
 .banner-spec-text p {
-    line-height: 1.4;
+    line-height: 1.2;
 }
 
 .banner-terms {
@@ -639,9 +639,6 @@ input[type=number] {
         margin-bottom: 8px;
     }
 
-    .banner-spec-text {
-        font-size: 13px;
-    }
 
     .time-tips1 {
         font-size: 16px;

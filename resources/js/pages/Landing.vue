@@ -343,8 +343,8 @@ onUnmounted(() => {
                 <div class="banner-spec-text" :class="locale">
                     <p v-html="t('messages.banner_desc')"></p>
                 </div>
-                <div class="banner-spec-text1" :class="locale"><a href="#">{{ t('messages.banner_desc_2') }}</a></div>
-                <div class="banner-terms" v-html="t('messages.banner_desc_3')"></div>
+                <!-- <div class="banner-spec-text1" :class="locale"><a href="#">{{ t('messages.banner_desc_2') }}</a></div> -->
+                <!-- <div class="banner-terms" v-html="t('messages.banner_desc_3')"></div> -->
             </div>
         </div>
     </section>
