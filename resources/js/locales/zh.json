@@ -25,7 +25,7 @@
     },
     "tips": {
         "submit_deadline": "請在{deadline}（GMT+3）前提交預測的收盤價。",
-        "integer_desc": "輸入產品收盤價的整數部分（例：若產品實際價格為 396.72，則預測 396 將被視為正確預測，而預測 397 則被視為錯誤預測）。​",
+        "integer_desc": "請輸⼊您預測的產品收盤價整數部分（例如：若預測收盤價為 396.72，則輸⼊ 396）。​",
         "closing_time_weekday": "*當日收盤價以 MT5 VantageMarkets-Live 系統時間 23:59 為準。",
         "closing_time_friday": "*當日收盤價以 MT5 VantageMarkets-Live 系統時間 23:55 為準。"
     },

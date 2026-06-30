@@ -25,7 +25,7 @@
     },
     "tips": {
         "submit_deadline": "请在{deadline}（GMT+3）前提交预测的收盘价。",
-        "integer_desc": "输入产品收盘价的整数部分（例如：若产品实际价格为396.72，则预测396将被视为正确预测，而预测397则被视为错误预测）。",
+        "integer_desc": "请输⼊您预测的产品收盘价整数部分（例如：若预测收盘价为 396.72，则输⼊396）。",
         "closing_time_weekday": "*当日收盘价以 MT5 VantageMarkets-Live 系统时间23:59为准。",
         "closing_time_friday": "*当日收盘价以 MT5 VantageMarkets-Live 系统时间23:55为准。"
     },

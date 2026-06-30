@@ -275,6 +275,13 @@ const formatGuessDate = (guessDate: string): string => {
     return guessDate;
 };
 
+const formatSymbol = (symbol: string): string => {
+    if (locale.value === 'ru' && symbol === 'META.24H') {
+        return 'META.24H*';
+    }
+    return symbol;
+};
+
 
 onMounted(() => {
     const savedLocale = localStorage.getItem('locale');
@@ -390,7 +397,7 @@ onUnmounted(() => {
                 <ul class="stocks-ul">
                     <li class="stocks-li" v-for="(item, index) in stocksList" :key="item.id">
                         <div class="stocks-li-flex">
-                            <div class="stocks-name">{{ item.symbol }}</div>
+                            <div class="stocks-name">{{ formatSymbol(item.symbol) }}</div>
                             <input class="stocks-input" type="number" :placeholder="item.placeholder" v-model="form.guesses[index].guessed_price" :disabled="!canGuess || submitting">
                             <div class="stocks-control">
                                 <button class="stocks-submit" @click="submitGuess(index)" :disabled="!canGuess || submitting">{{ t('stocks.submit') }}</button>
@@ -404,6 +411,7 @@ onUnmounted(() => {
 
         <div id="footer">
             {{ t('footer.risk_warning') }}
+            <div v-if="locale == 'ru'">*Деятельность компании Meta Platforms Inc. запрещена на территории РФ.</div>
         </div>
     </section>
 
@@ -437,7 +445,7 @@ onUnmounted(() => {
                         <div v-for="record in group.records" :key="record.id" class="history-item">
                             <div class="history-item-main">
                                 <div class="history-stock">
-                                    <span class="history-stock-symbol">{{ record.stock.symbol }}</span>
+                                    <span class="history-stock-symbol">{{ formatSymbol(record.stock.symbol) }}</span>
                                 </div>
                                  <div class="history-price">{{ record.guessed_price }}</div>
                             </div>
@@ -467,7 +475,7 @@ onUnmounted(() => {
                 <div class="login-title-box">
                     <div class="login-title" :class="locale">{{ t('messages.banner_title') }}</div>
                     <div class="login-subtitle" :class="locale">
-                        <p>{{ t('messages.banner_desc') }}</p>
+                        <p v-html="t('messages.banner_desc')"></p>
                     </div>
                 </div>
                 <img src="/images/login-img.webp" class="login-img"/>

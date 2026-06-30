@@ -14,9 +14,9 @@
     },
     "timer": {
         "remaining": "Waktu tersisa",
-        "hour": "Jam.",
-        "minute": "Menit.",
-        "second": "Detik."
+        "hour": "Jam",
+        "minute": "Menit",
+        "second": "Detik"
     },
     "history": {
         "title": "Riwayat Tebakan Saya",
