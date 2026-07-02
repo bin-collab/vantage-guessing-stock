@@ -77,8 +77,11 @@ class RankingResource extends Resource
                         }
 
                         return response()->streamDownload(function () use ($csv) {
+                            echo "\xEF\xBB\xBF";
                             echo $csv->toString();
-                        }, 'ranking_'.now()->format('Y-m-d').'.csv');
+                        }, 'ranking_'.now()->format('Y-m-d').'.csv', [
+                            'Content-Type' => 'text/csv; charset=UTF-8',
+                        ]);
                     }),
             ])
             ->recordActions([])

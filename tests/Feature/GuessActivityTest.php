@@ -189,4 +189,19 @@ class GuessActivityTest extends TestCase
         $responseJson->assertStatus(422);
         $responseJson->assertJsonPath('errors.message', '操作過於頻繁，請稍後再試。');
     }
+
+    public function test_guest_cannot_submit_guess_and_redirects_to_landing(): void
+    {
+        $stock = Stock::create(['symbol' => 'TSLA.24H', 'name' => 'Tesla']);
+
+        Carbon::setTestNow(Carbon::parse('2026-07-06 10:00:00', '+03:00'));
+
+        $response = $this->post('/guess', [
+            'guesses' => [
+                ['stock_id' => $stock->id, 'guessed_price' => 200],
+            ],
+        ]);
+
+        $response->assertRedirect('/');
+    }
 }

@@ -97,8 +97,11 @@ class GuessesTable
                         }
 
                         return response()->streamDownload(function () use ($csv) {
+                            echo "\xEF\xBB\xBF";
                             echo $csv->toString();
-                        }, 'guesses_'.now()->format('Y-m-d').'.csv');
+                        }, 'guesses_'.now()->format('Y-m-d').'.csv', [
+                            'Content-Type' => 'text/csv; charset=UTF-8',
+                        ]);
                     }),
             ])
             ->recordActions([

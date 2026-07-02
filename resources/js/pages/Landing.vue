@@ -157,6 +157,17 @@ const submitGuess = (index: number) => {
         ElMessage.error(t('messages.enter_price'));
         return;
     }
+    // 自动将小数向下取整
+    const parsedPrice = Number(guess.guessed_price);
+    if (!isNaN(parsedPrice) && !Number.isInteger(parsedPrice)) {
+        guess.guessed_price = Math.floor(parsedPrice);
+        //ElMessage.info(t('tips.integer_desc'));
+    }
+    const priceStr = String(guess.guessed_price).trim();
+    if (!/^\d+$/.test(priceStr)) {
+        ElMessage.error(t('tips.integer_desc'));
+        return;
+    }
     submitting.value = true;
     router.post('/guess', { guesses: [guess] }, {
         preserveScroll: true,
@@ -164,6 +175,11 @@ const submitGuess = (index: number) => {
             ElMessage.success(t('messages.submit_success'));
         },
         onError: (errors: any) => {
+            const hasGuessError = Object.keys(errors).some(key => key.includes('guessed_price') || key.includes('guesses'));
+            if (hasGuessError) {
+                ElMessage.error(t('tips.integer_desc'));
+                return;
+            }
             if (errors.message) {
                 ElMessage.error(translateError(errors.message));
             }
